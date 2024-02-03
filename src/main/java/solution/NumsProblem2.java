@@ -1,10 +1,9 @@
 package solution;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+
 
 public class NumsProblem2 {
 
@@ -258,6 +257,59 @@ public class NumsProblem2 {
         return result;
     }
 
+    public int[] getNoZeroIntegers(int n) {
+        int[] res = new int[2];
+
+        for (int i = 1; i < n; i++) {
+            int c = n - i;
+            if (check(c) && check(i)) {
+                res[0] = i;
+                res[1] = c;
+                return res;
+            }
+        }
+
+        return res;
+    }
+
+    public boolean check(int m) {
+        while (m > 0) {
+            int digit = m % 10;
+            if (digit == 0) {
+                return false;
+            }
+            m /= 10;
+        }
+        return true;
+    }
+
+    public int maximum69Number(int num) {
+        char[] charArray = String.valueOf(num).toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            if (charArray[i] == '6') {
+                charArray[i] = '9';
+                break;
+            }
+        }
+        return Integer.parseInt(new String(charArray));
+    }
+
+    public int[] arrayRankTransform(int[] arr) {
+        HashMap<Integer, Integer> arrayRanks = new HashMap<>();
+        int[] sortedArr = Arrays.copyOf(arr, arr.length);
+        Arrays.sort(sortedArr);
+        int rank = 1;
+        for (int i = 0; i < sortedArr.length; i++) {
+            if (!arrayRanks.containsKey(sortedArr[i])) {
+                arrayRanks.put(sortedArr[i], rank++);
+            }
+        }
+        int[] ranks = new int[arr.length];
+        for (int i = 0; i < arr.length; i++)
+            ranks[i] = arrayRanks.get(arr[i]);
+
+        return ranks;
+    }
 
 
 }

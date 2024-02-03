@@ -702,11 +702,11 @@ public class StringProblems {
     public String freqAlphabets(String s) {
         StringBuilder sb = new StringBuilder();
 
-        for(int i = s.length()-1; i >= 0; i--) {
+        for (int i = s.length() - 1; i >= 0; i--) {
             int number;
-            if(s.charAt(i) == '#') { // If it is a two-digit number
-                number = (s.charAt(i-2) - '0') * 10 + (s.charAt(i-1) - '0');
-                i-=2;
+            if (s.charAt(i) == '#') { // If it is a two-digit number
+                number = (s.charAt(i - 2) - '0') * 10 + (s.charAt(i - 1) - '0');
+                i -= 2;
             } else { // If it is a single-digit number
                 number = s.charAt(i) - '0';
             }
@@ -717,5 +717,9 @@ public class StringProblems {
         return sb.reverse().toString();
     }
 
+    public int removePalindromeSub(String s) {
+        if (s.contentEquals(new StringBuilder(s).reverse())) return 1;
+        else return 2;
+    }
 
 }
