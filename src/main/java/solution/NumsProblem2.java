@@ -1,8 +1,11 @@
 package solution;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 
 
 public class NumsProblem2 {
@@ -309,6 +312,104 @@ public class NumsProblem2 {
             ranks[i] = arrayRanks.get(arr[i]);
 
         return ranks;
+    }
+
+    public int countNegatives(int[][] grid) {
+        int countOfNeg = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] < 0) {
+                    countOfNeg += (grid[i].length - j);
+                    break;
+                }
+            }
+        }
+        return countOfNeg;
+    }
+
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] count = new int[101];
+        int n = nums.length;
+
+        for (int i = 0; i < n; i++) {
+            count[nums[i]]++;
+        }
+
+        for (int i = 1; i <= 100; i++) {
+            count[i] += count[i - 1];
+        }
+
+        int[] result = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 0) {
+                result[i] = 0;
+            } else {
+                result[i] = count[nums[i] - 1];
+            }
+        }
+
+        return result;
+    }
+
+    public List<Integer> luckyNumbers(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        ArrayList<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < row; i++) {
+            int minColIndex = minColIndexInRow(matrix, i, col);
+            int luckyNum = matrix[i][minColIndex];
+            if (checkIfMaxInCol(matrix, minColIndex, luckyNum, row)) {
+                ans.add(luckyNum);
+            }
+        }
+        return ans;
+    }
+
+    private int minColIndexInRow(int[][] matrix, int i, int col) {
+        int j = 0, min = matrix[i][j];
+        int minColIndex = 0;
+        for (j = 1; j < col; j++) {
+            if (matrix[i][j] < min) {
+                min = matrix[i][j];
+                minColIndex = j;
+            }
+        }
+        return minColIndex;
+    }
+
+    private Boolean checkIfMaxInCol(int[][] matrix, int j, int num, int row) {
+        for (int i = 0; i < row; i++) {
+            if (matrix[i][j] > num) return false;
+        }
+        return true;
+    }
+
+    public int[] createTargetArray(int[] nums, int[] index) {
+        List<Integer> ans = new ArrayList<>();
+        int[] target = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            ans.add(index[i], nums[i]);
+        }
+        int i = 0;
+        for (int a : ans) {
+            target[i++] = a;
+        }
+        return target;
+    }
+
+    public int findLucky(int[] arr) {
+        int[] cnt = new int[501];
+        for (int a : arr) {
+            ++cnt[a];
+        }
+        for (int i = 500; i > 0; --i) {
+            if (cnt[i] == i) {
+                return i;
+            }
+        }
+        return -1;
+
     }
 
 
