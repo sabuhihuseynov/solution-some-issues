@@ -424,7 +424,23 @@ public class NumsProblem2 {
         return Math.abs(min) + 1;
     }
 
+    public List<Integer> minSubsequence(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+        Arrays.sort(nums);
 
-
+        int s = 0;
+        for (int i : nums)
+            s += i;
+        int temp = 0;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            temp += nums[i];
+            if (temp > s - temp) {
+                list.add(nums[i]);
+                return list;
+            } else
+                list.add(nums[i]);
+        }
+        return list;
+    }
 }
 
