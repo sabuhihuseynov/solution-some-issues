@@ -774,5 +774,42 @@ public class StringProblems {
         }
         return false;
     }
+    public String reformat(String s) {
+        if (s.length() == 1)
+            return s;
+        int n = s.length();
+        char[] res = new char[n];
+        char[] digits = new char[n];
+        char[] letters = new char[n];
+        int digitsSize = 0;
+        int lettersSize = 0;
+        for (char c : s.toCharArray()) {
+            if (c >= '0' && c <= '9') {
+                digits[digitsSize++] = c;
+            } else {
+                letters[lettersSize++] = c;
+            }
+        }
+        if (digitsSize == 0 || lettersSize == 0 || Math.abs(lettersSize - digitsSize) > 1)
+            return "";
+        int cur = 0;
+        digitsSize--;
+        lettersSize--;
+        while (cur < n) {
+            if (digitsSize > lettersSize) {
+                if (digitsSize >= 0)
+                    res[cur++] = digits[digitsSize--];
+                if (lettersSize >= 0)
+                    res[cur++] = letters[lettersSize--];
+
+            } else {
+                if (lettersSize >= 0)
+                    res[cur++] = letters[lettersSize--];
+                if (digitsSize >= 0)
+                    res[cur++] = digits[digitsSize--];
+            }
+        }
+        return String.valueOf(res);
+    }
 
 }
