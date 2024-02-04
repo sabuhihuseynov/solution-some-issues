@@ -726,32 +726,53 @@ public class StringProblems {
         int[] freq = new int[26];
         int len = s.length();
 
-        for(char c : s.toCharArray()){
-            freq[c-'a']++;
+        for (char c : s.toCharArray()) {
+            freq[c - 'a']++;
         }
 
         StringBuilder sb = new StringBuilder();
 
-        while(len != 0){
+        while (len != 0) {
 
             //step 1-2-3
-            for(int i=0; i<26; i++){
-                if(freq[i] > 0){
-                    sb.append((char)(i+'a'));
-                    freq[i]--;len--;
+            for (int i = 0; i < 26; i++) {
+                if (freq[i] > 0) {
+                    sb.append((char) (i + 'a'));
+                    freq[i]--;
+                    len--;
                 }
             }
 
             //step 4-5-6
-            for(int i=25; i>=0; i--){
-                if(freq[i] > 0){
-                    sb.append((char)(i+'a'));
-                    len--;freq[i]--;
+            for (int i = 25; i >= 0; i--) {
+                if (freq[i] > 0) {
+                    sb.append((char) (i + 'a'));
+                    len--;
+                    freq[i]--;
                 }
             }
         }
 
         return sb.toString();
+    }
+
+    public List<String> stringMatching(String[] words) {
+        List<String> stringMatchList = new ArrayList<>();
+        for (int i = 0; i < words.length; i++) {
+            boolean contain = checkContains(words, i);
+            if (contain) {
+                stringMatchList.add(words[i]);
+            }
+        }
+        return stringMatchList;
+    }
+
+    private boolean checkContains(String[] words, int i) {
+        for (int j = 0; j < words.length; j++) {
+            if (i == j) continue;
+            if (words[j].contains(words[i])) return true;
+        }
+        return false;
     }
 
 }
