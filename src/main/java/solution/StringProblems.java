@@ -774,6 +774,7 @@ public class StringProblems {
         }
         return false;
     }
+
     public String reformat(String s) {
         if (s.length() == 1)
             return s;
@@ -811,5 +812,19 @@ public class StringProblems {
         }
         return String.valueOf(res);
     }
+
+    public String destCity(List<List<String>> paths) {
+        Map<String, String> map = new HashMap<>();
+        for (List<String> path : paths) {
+            map.put(path.get(0), path.get(1));
+        }
+        String destination = paths.get(0).get(1);
+
+        while (map.containsKey(destination)) {
+            destination = map.get(destination);
+        }
+        return destination;
+    }
+
 
 }

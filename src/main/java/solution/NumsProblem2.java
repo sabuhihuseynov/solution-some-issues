@@ -442,5 +442,27 @@ public class NumsProblem2 {
         }
         return list;
     }
+
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        List<Boolean> ifKidHaveMaxCandies = new ArrayList<>(candies.length);
+        int max = findMax(candies);
+
+        for (int candy : candies) {
+            if (candy + extraCandies >= max) {
+                ifKidHaveMaxCandies.add(true);
+            } else ifKidHaveMaxCandies.add(false);
+        }
+        return ifKidHaveMaxCandies;
+    }
+
+    private int findMax(int[] candies) {
+        int max = candies[0];
+        for (int i = 1; i < candies.length; i++) {
+            if (max < candies[i]) {
+                max = candies[i];
+            }
+        }
+        return max;
+    }
 }
 
