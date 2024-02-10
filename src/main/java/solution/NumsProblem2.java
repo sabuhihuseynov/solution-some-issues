@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.stream.IntStream;
 
 
 public class NumsProblem2 {
@@ -113,7 +114,9 @@ public class NumsProblem2 {
 
     public int[] relativeSortArray(int[] arr1, int[] arr2) {
         int[] ans = new int[1001];
-        for (int n : arr1) ans[n]++;
+        for (int n : arr1) {
+            ans[n]++;
+        }
         int i = 0;
         for (int n : arr2) {
             while (ans[n]-- > 0) {
@@ -179,7 +182,9 @@ public class NumsProblem2 {
     }
 
     public boolean checkStraightLine(int[][] coordinates) {
-        if (coordinates.length <= 2) return true;
+        if (coordinates.length <= 2) {
+            return true;
+        }
         int x0 = coordinates[0][0];
         int y0 = coordinates[0][1];
         int x1 = coordinates[1][0];
@@ -191,7 +196,9 @@ public class NumsProblem2 {
             // double varslope=(double)(y-y0)/(x-x0);
             // if(slope!=varslope || ) return false;
 
-            if ((y1 - y0) * (x - x0) != (y - y0) * (x1 - x0)) return false;
+            if ((y1 - y0) * (x - x0) != (y - y0) * (x1 - x0)) {
+                return false;
+            }
         }
         return true;
     }
@@ -203,7 +210,9 @@ public class NumsProblem2 {
         for (int element : arr) {
             if (temp == element) {
                 count++;
-            } else count = 1;
+            } else {
+                count = 1;
+            }
             if (count > specialValue) {
                 break;
             }
@@ -220,7 +229,9 @@ public class NumsProblem2 {
                 element = element / 10;
                 i++;
             }
-            if (i % 2 == 0) count++;
+            if (i % 2 == 0) {
+                count++;
+            }
         }
         return count;
     }
@@ -309,8 +320,9 @@ public class NumsProblem2 {
             }
         }
         int[] ranks = new int[arr.length];
-        for (int i = 0; i < arr.length; i++)
+        for (int i = 0; i < arr.length; i++) {
             ranks[i] = arrayRanks.get(arr[i]);
+        }
 
         return ranks;
     }
@@ -381,7 +393,9 @@ public class NumsProblem2 {
 
     private Boolean checkIfMaxInCol(int[][] matrix, int j, int num, int row) {
         for (int i = 0; i < row; i++) {
-            if (matrix[i][j] > num) return false;
+            if (matrix[i][j] > num) {
+                return false;
+            }
         }
         return true;
     }
@@ -429,16 +443,18 @@ public class NumsProblem2 {
         Arrays.sort(nums);
 
         int s = 0;
-        for (int i : nums)
+        for (int i : nums) {
             s += i;
+        }
         int temp = 0;
         for (int i = nums.length - 1; i >= 0; i--) {
             temp += nums[i];
             if (temp > s - temp) {
                 list.add(nums[i]);
                 return list;
-            } else
+            } else {
                 list.add(nums[i]);
+            }
         }
         return list;
     }
@@ -450,7 +466,9 @@ public class NumsProblem2 {
         for (int candy : candies) {
             if (candy + extraCandies >= max) {
                 ifKidHaveMaxCandies.add(true);
-            } else ifKidHaveMaxCandies.add(false);
+            } else {
+                ifKidHaveMaxCandies.add(false);
+            }
         }
         return ifKidHaveMaxCandies;
     }
@@ -464,5 +482,25 @@ public class NumsProblem2 {
         }
         return max;
     }
+
+    public boolean kLengthApart(int[] nums, int k) {
+        int numberOfZerosBetweenOnes = 0;
+        if (nums[0] == 0) {
+            numberOfZerosBetweenOnes = k;
+        }
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                if (numberOfZerosBetweenOnes < k) {
+                    return false;
+                }
+                numberOfZerosBetweenOnes = 0;
+            } else {
+                numberOfZerosBetweenOnes++;
+            }
+        }
+        return true;
+    }
+
 }
 

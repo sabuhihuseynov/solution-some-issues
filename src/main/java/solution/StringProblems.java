@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.TreeSet;
 
 public class StringProblems {
 
@@ -74,15 +75,23 @@ public class StringProblems {
 
         String[] str = s.split(" ");
 
-        if (str.length != pattern.length()) return false;
+        if (str.length != pattern.length()) {
+            return false;
+        }
 
         for (int i = 0; i < pattern.length(); i++) {
             char a = pattern.charAt(i);
-            if (!map.isEmpty() && map.containsKey(a) && !map.get(a).equals(str[i])) return false;
+            if (!map.isEmpty() && map.containsKey(a) && !map.get(a).equals(str[i])) {
+                return false;
+            }
 
-            if (!map.isEmpty() && map.containsKey(a) && map.get(a).equals(str[i])) continue;
+            if (!map.isEmpty() && map.containsKey(a) && map.get(a).equals(str[i])) {
+                continue;
+            }
 
-            if (!map.isEmpty() && map.containsValue(str[i])) return false;
+            if (!map.isEmpty() && map.containsValue(str[i])) {
+                return false;
+            }
 
             map.put(a, str[i]);
         }
@@ -105,23 +114,30 @@ public class StringProblems {
         String text = s + s;
         String pattern = s;
         int pos = text.indexOf(pattern, 1);
-        if (pos != -1 && pos < s.length())
+        if (pos != -1 && pos < s.length()) {
             return true;
+        }
         return false;
     }
 
     public boolean detectCapitalUse(String word) {
-        if (word.length() == 0 || word.length() == 1) return true;
+        if (word.length() == 0 || word.length() == 1) {
+            return true;
+        }
 
         if (Character.isUpperCase(word.charAt(0))) {
             boolean isFirstCharacter = Character.isUpperCase(word.charAt(1));
             for (int i = 2; i < word.length(); i++) {
                 boolean currentCharState = Character.isUpperCase(word.charAt(i));
-                if (currentCharState != isFirstCharacter) return false;
+                if (currentCharState != isFirstCharacter) {
+                    return false;
+                }
             }
         } else {
             for (int i = 1; i < word.length(); i++) {
-                if (Character.isUpperCase(word.charAt(i))) return false;
+                if (Character.isUpperCase(word.charAt(i))) {
+                    return false;
+                }
             }
         }
         return true;
@@ -173,7 +189,9 @@ public class StringProblems {
             if (s.charAt(i) == s.charAt(j)) {
                 i++;
                 j--;
-            } else return isPalindrome(s, i + 1, j) || isPalindrome(s, i, j - 1);
+            } else {
+                return isPalindrome(s, i + 1, j) || isPalindrome(s, i, j - 1);
+            }
         }
         return true;
     }
@@ -183,7 +201,9 @@ public class StringProblems {
             if (s.charAt(i) == s.charAt(j)) {
                 i++;
                 j--;
-            } else return false;
+            } else {
+                return false;
+            }
         }
         return true;
     }
@@ -203,7 +223,9 @@ public class StringProblems {
         }
         if (index == 10) {
             return "YES";
-        } else return "NO";
+        } else {
+            return "NO";
+        }
     }
 
     public List<Integer> stringAnagram(List<String> dictionary, List<String> query) {
@@ -275,7 +297,9 @@ public class StringProblems {
         }
         if (set.size() != 26) {
             return "not pangram";
-        } else return "pangram";
+        } else {
+            return "pangram";
+        }
     }
 
     public int renameFile(String newName, String oldName) {
@@ -316,28 +340,37 @@ public class StringProblems {
 
     public static String mystery(String s) {
         int N = s.length();
-        if (N <= 1) return s;
+        if (N <= 1) {
+            return s;
+        }
         String a = s.substring(0, N / 2);
         String b = s.substring(N / 2, N);
         return mystery(b) + mystery(a);
     }
 
     public static boolean rotateString(String s, String goal) {
-        if (s.length() != goal.length()) return false;
-        if (s.equals(goal)) return true;
+        if (s.length() != goal.length()) {
+            return false;
+        }
+        if (s.equals(goal)) {
+            return true;
+        }
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < s.length(); i++) {
             sb.append(s.substring(1)).append(s.charAt(0));
             s = sb.toString();
-            if (s.equals(goal)) return true;
+            if (s.equals(goal)) {
+                return true;
+            }
             sb.setLength(0);
         }
         return false;
     }
 
     public static int uniqueMorseRepresentations(String[] words) {
-        String[] morse = new String[]{".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-",
-                ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
+        String[] morse = new String[] {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-",
+                ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--",
+                "--.."};
         HashMap<Character, String> map = new HashMap<>();
         for (char i = 'a'; i <= 'z'; i++) {
             map.put(i, morse[i - 'a']);
@@ -365,7 +398,7 @@ public class StringProblems {
                 sum = widths[s.charAt(i) - 'a'];
             }
         }
-        return new int[]{lines, sum};
+        return new int[] {lines, sum};
     }
 
     public static String mostCommonWord(String paragraph, String[] banned) {
@@ -453,10 +486,11 @@ public class StringProblems {
     private String processBackspace(String s) {
         StringBuilder sb = new StringBuilder(s);
         while (sb.indexOf("#") >= 0) {
-            if (sb.indexOf("#") == 0)
+            if (sb.indexOf("#") == 0) {
                 sb.deleteCharAt(0);
-            else
+            } else {
                 sb.delete(sb.indexOf("#") - 1, sb.indexOf("#") + 1);
+            }
         }
         return sb.toString();
     }
@@ -465,19 +499,27 @@ public class StringProblems {
         HashMap<String, Integer> hm = new HashMap<>();
         String[] s1Arr = s1.split(" ");
         for (String s : s1Arr) {
-            if (hm.containsKey(s)) hm.put(s, hm.get(s) + 1);
-            else hm.put(s, 1);
+            if (hm.containsKey(s)) {
+                hm.put(s, hm.get(s) + 1);
+            } else {
+                hm.put(s, 1);
+            }
             ;
         }
         String[] s2Arr = s2.split(" ");
         for (String s : s2Arr) {
-            if (hm.containsKey(s)) hm.put(s, hm.get(s) + 1);
-            else hm.put(s, 1);
+            if (hm.containsKey(s)) {
+                hm.put(s, hm.get(s) + 1);
+            } else {
+                hm.put(s, 1);
+            }
         }
 
         ArrayList<String> resultList = new ArrayList<>();
         for (String s : hm.keySet()) {
-            if (hm.get(s) == 1) resultList.add(s);
+            if (hm.get(s) == 1) {
+                resultList.add(s);
+            }
         }
 
         String[] resultArr = new String[resultList.size()];
@@ -495,8 +537,11 @@ public class StringProblems {
                 temp[high] = i;
                 low++;
                 high--;
-            } else if (!Character.isAlphabetic(temp[low])) low++;
-            else if (!Character.isAlphabetic(temp[high])) high--;
+            } else if (!Character.isAlphabetic(temp[low])) {
+                low++;
+            } else if (!Character.isAlphabetic(temp[high])) {
+                high--;
+            }
         }
         return String.valueOf(temp);
     }
@@ -509,8 +554,12 @@ public class StringProblems {
             String domain = emailSplit[1];
             StringBuilder stringBuilder = new StringBuilder();
             for (int j = 0; j < local.length(); j++) {
-                if (local.charAt(j) == '+') break;
-                if (local.charAt(j) != '.') stringBuilder.append(local.charAt(j));
+                if (local.charAt(j) == '+') {
+                    break;
+                }
+                if (local.charAt(j) != '.') {
+                    stringBuilder.append(local.charAt(j));
+                }
             }
             stringBuilder.append('@');
             stringBuilder.append(domain);
@@ -603,7 +652,9 @@ public class StringProblems {
     }
 
     public String removeDuplicatesOptimal(String s) {
-        if (s == null) return null;
+        if (s == null) {
+            return null;
+        }
 
         char[] stack = new char[s.length()];
         int i = 0;
@@ -620,8 +671,9 @@ public class StringProblems {
     }
 
     public String gcdOfStrings(String str1, String str2) {
-        if (!(str1 + str2).equals(str2 + str1))
+        if (!(str1 + str2).equals(str2 + str1)) {
             return "";
+        }
         int gcd = gcd(str1.length(), str2.length());
         return str1.substring(0, gcd);
     }
@@ -648,7 +700,9 @@ public class StringProblems {
                 sb.append('[');
                 sb.append('.');
                 sb.append(']');
-            } else sb.append(address.charAt(i));
+            } else {
+                sb.append(address.charAt(i));
+            }
         }
         return sb.toString();
     }
@@ -688,7 +742,9 @@ public class StringProblems {
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == 'R') {
                 r++;
-            } else l++;
+            } else {
+                l++;
+            }
 
             if (r == l) {
                 result++;
@@ -718,8 +774,11 @@ public class StringProblems {
     }
 
     public int removePalindromeSub(String s) {
-        if (s.contentEquals(new StringBuilder(s).reverse())) return 1;
-        else return 2;
+        if (s.contentEquals(new StringBuilder(s).reverse())) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
     public String sortStringAsWanted(String s) {
@@ -769,15 +828,20 @@ public class StringProblems {
 
     private boolean checkContains(String[] words, int i) {
         for (int j = 0; j < words.length; j++) {
-            if (i == j) continue;
-            if (words[j].contains(words[i])) return true;
+            if (i == j) {
+                continue;
+            }
+            if (words[j].contains(words[i])) {
+                return true;
+            }
         }
         return false;
     }
 
     public String reformat(String s) {
-        if (s.length() == 1)
+        if (s.length() == 1) {
             return s;
+        }
         int n = s.length();
         char[] res = new char[n];
         char[] digits = new char[n];
@@ -791,23 +855,28 @@ public class StringProblems {
                 letters[lettersSize++] = c;
             }
         }
-        if (digitsSize == 0 || lettersSize == 0 || Math.abs(lettersSize - digitsSize) > 1)
+        if (digitsSize == 0 || lettersSize == 0 || Math.abs(lettersSize - digitsSize) > 1) {
             return "";
+        }
         int cur = 0;
         digitsSize--;
         lettersSize--;
         while (cur < n) {
             if (digitsSize > lettersSize) {
-                if (digitsSize >= 0)
+                if (digitsSize >= 0) {
                     res[cur++] = digits[digitsSize--];
-                if (lettersSize >= 0)
+                }
+                if (lettersSize >= 0) {
                     res[cur++] = letters[lettersSize--];
+                }
 
             } else {
-                if (lettersSize >= 0)
+                if (lettersSize >= 0) {
                     res[cur++] = letters[lettersSize--];
-                if (digitsSize >= 0)
+                }
+                if (digitsSize >= 0) {
                     res[cur++] = digits[digitsSize--];
+                }
             }
         }
         return String.valueOf(res);
@@ -826,5 +895,18 @@ public class StringProblems {
         return destination;
     }
 
+    public int maxPower(String s) {
+        int result = 1, count = 1;
+
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (s.charAt(i) == s.charAt(i + 1)) {
+                count++;
+            } else {
+                result = Math.max(result, count);
+                count = 1;
+            }
+        }
+        return Math.max(result, count);
+    }
 
 }
