@@ -502,5 +502,122 @@ public class NumsProblem2 {
         return true;
     }
 
+    public int maxPower(String s) {
+        int result = 1, count = 1;
+
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (s.charAt(i) == s.charAt(i + 1)) {
+                count++;
+            } else {
+                result = Math.max(result, count);
+                count = 1;
+            }
+        }
+        return Math.max(result, count);
+    }
+
+    public int busyStudent(int[] startTime, int[] endTime, int queryTime) {
+        int count = 0;
+        for (int i = 0; i < startTime.length; i++) {
+            if (queryTime >= startTime[i] && queryTime <= endTime[i]) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public boolean canBeEqual(int[] target, int[] arr) {
+        int[] count = new int[1001];
+        for (int i = 0; i < target.length; i++) {
+            count[target[i]]++;
+            count[arr[i]]--;
+        }
+        for (int i = 0; i < 1001; i++) {
+            if (count[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int maxProduct(int[] nums) {
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+        for (int num : nums) {
+            if (num > largest) {
+                secondLargest = largest;
+                largest = num;
+            } else if (num > secondLargest) {
+                secondLargest = num;
+            }
+        }
+        return (largest - 1) * (secondLargest - 1);
+    }
+
+    public int[] shuffle(int[] nums, int n) {
+        int[] shuffledArr = new int[nums.length];
+
+        for (int i = 0, j = 0; i < nums.length / 2; i++) {
+            shuffledArr[j++] = nums[i];
+            shuffledArr[j++] = nums[i + n];
+        }
+        return shuffledArr;
+    }
+
+    public int[] finalPrices(int[] prices) {
+        for (int i = 0; i < prices.length - 1; i++) {
+            for (int j = i + 1; j < prices.length; j++) {
+                if (prices[i] >= prices[j]) {
+                    prices[i] -= prices[j];
+                    break;
+                }
+            }
+        }
+        return prices;
+    }
+
+    public int[] runningSum(int[] nums) {
+        int[] runningArr = new int[nums.length];
+        int sum = nums[0];
+        runningArr[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            sum += nums[i];
+            runningArr[i] = sum;
+        }
+        return runningArr;
+    }
+
+    public int xorOperation(int n, int start) {
+        int[] nums = new int[n];
+        int elementXOR = start;
+        for (int i = 1; i < n; i++) {
+            nums[i] = start + 2 * i;
+            elementXOR ^= nums[i];
+        }
+        return elementXOR;
+    }
+
+    public double average(int[] salary) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        int count = 0;
+        double sum = 0;
+
+        for (int money : salary) {
+            if (money < min) {
+                min = money;
+            }
+            if (money > max) {
+                max = money;
+            }
+        }
+        for (int money : salary) {
+            if (money != min && money != max) {
+                sum += money;
+                count++;
+            }
+        }
+        return sum / count;
+    }
 }
 

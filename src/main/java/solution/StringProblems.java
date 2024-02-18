@@ -895,18 +895,14 @@ public class StringProblems {
         return destination;
     }
 
-    public int maxPower(String s) {
-        int result = 1, count = 1;
-
-        for (int i = 0; i < s.length() - 1; i++) {
-            if (s.charAt(i) == s.charAt(i + 1)) {
-                count++;
-            } else {
-                result = Math.max(result, count);
-                count = 1;
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        String[] words = sentence.split(" ");
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].startsWith(searchWord)) {
+                return i;
             }
         }
-        return Math.max(result, count);
+        return -1;
     }
 
 }

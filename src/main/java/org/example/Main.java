@@ -17,10 +17,6 @@ public class Main {
         SearchingAlgorithms searchingAlgorithms = new SearchingAlgorithms();
         NumsProblem2 numsProblem2 = new NumsProblem2();
 
-        String s = "abbcccddddeeeeedcba";
-        long startTime = System.currentTimeMillis();
-        System.out.println(stringProblems.maxPower(s));
-        long endTime = System.currentTimeMillis();
-        System.out.println("Time for execution method :" + (endTime - startTime));
+
     }
 }
