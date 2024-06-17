@@ -2,6 +2,7 @@ package solution;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -619,5 +620,48 @@ public class NumsProblem2 {
         }
         return sum / count;
     }
+
+    public boolean canMakeArithmeticProgression(int[] arr) {
+        Arrays.sort(arr);
+        int diff = arr[1] - arr[0];
+        for (int i = arr.length - 1; i > 0; i--) {
+            if (diff != arr[i] - arr[i - 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int maxArea(int[] height) {
+        int area = 0;
+        int left = 0;
+        int right = height.length - 1;
+        while (left < right) {
+            int minHeight = Math.min(height[left], height[right]);
+            area = Math.max(area, (right - left) * minHeight);
+            while (left < right && height[left] <= minHeight) {
+                left++;
+            }
+            while (left < right && height[right] <= minHeight) {
+                right--;
+            }
+        }
+        return area;
+    }
+
+    public int missingNumber(int[] nums) {
+        int[] numbersCountArr = new int[nums.length + 1];
+        for (int num : nums) {
+            numbersCountArr[num]++;
+        }
+        for (int i = 0; i < numbersCountArr.length; i++) {
+            if (numbersCountArr[i] == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
 }
 

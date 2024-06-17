@@ -1,7 +1,5 @@
 package solution;
 
-import model.Trie;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -148,45 +146,5 @@ public class InterviewQuestions {
         }
         System.out.println(priorityQueue);
     }
-
-    public void search(Trie trie, String searchText) {
-        for (int i = 0; i < searchText.length(); i++) {
-            char c = searchText.charAt(i);
-            if (!trie.childs.containsKey(c)) {
-                return;
-            }
-            trie = trie.childs.get(c);
-        }
-        printTrie(trie);
-    }
-
-    public void printTrie(Trie trie) {
-        if (trie.word != null) {
-            System.out.println(trie.word);
-        }
-        for (char c : trie.childs.keySet()) {
-            printTrie(trie.childs.get(c));
-        }
-    }
-
-    public Trie buildTrie(String[] wordDB) {
-        Trie root = new Trie(' ');
-        for (String word : wordDB) {
-            Trie current = root;
-            for (int i = 0; i < word.length(); i++) {
-                char c = word.charAt(i);
-                if (!current.childs.containsKey(c)) {
-                    Trie newTrie = new Trie(c);
-                    current.childs.put(c, newTrie);
-                }
-                current = current.childs.get(c);
-            }
-            current.word = word;
-        }
-        return root;
-    }
-
-
-
 
 }
