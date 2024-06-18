@@ -3,7 +3,7 @@ package solution;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class Util {
+public class CommonUtil {
 
     public static HashMap<String, String> findCountryIso2Code() {
         String[] isoCountries = Locale.getISOCountries();

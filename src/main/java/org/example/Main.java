@@ -1,8 +1,5 @@
 package org.example;
 
-
-import java.util.Arrays;
-import java.util.stream.IntStream;
 import solution.NumsProblem2;
 import solution.SearchingAlgorithms;
 import solution.SortingAlgorithms;

@@ -2,11 +2,13 @@ package solution;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Stack;
 import java.util.TreeSet;
 
@@ -368,7 +370,7 @@ public class StringProblems {
     }
 
     public static int uniqueMorseRepresentations(String[] words) {
-        String[] morse = new String[] {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-",
+        String[] morse = new String[]{".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-",
                 ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--",
                 "--.."};
         HashMap<Character, String> map = new HashMap<>();
@@ -398,7 +400,7 @@ public class StringProblems {
                 sum = widths[s.charAt(i) - 'a'];
             }
         }
-        return new int[] {lines, sum};
+        return new int[]{lines, sum};
     }
 
     public static String mostCommonWord(String paragraph, String[] banned) {
@@ -961,4 +963,26 @@ public class StringProblems {
         }
         return dp[n];
     }
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int maxLength = 0;
+        Set<Character> charSet = new HashSet<>();
+        int left = 0;
+
+        for (int right = 0; right < n; right++) {
+            if (!charSet.contains(s.charAt(right))) {
+                charSet.add(s.charAt(right));
+                maxLength = Math.max(maxLength, right - left + 1);
+            } else {
+                while (charSet.contains(s.charAt(right))) {
+                    charSet.remove(s.charAt(left));
+                    left++;
+                }
+                charSet.add(s.charAt(right));
+            }
+        }
+        return maxLength;
+    }
+
+
 }

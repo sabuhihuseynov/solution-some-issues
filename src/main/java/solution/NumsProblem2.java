@@ -3,6 +3,8 @@ package solution;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -663,5 +665,25 @@ public class NumsProblem2 {
     }
 
 
+
+    public int longestConsecutive(int[] nums) {
+
+        HashSet<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        int maxConsecutiveLenght = 0;
+
+        for (int element : set) {
+            if (!set.contains(element - 1)) {
+                int expectedElement = element + 1;
+                while (set.contains(expectedElement)) {
+                    expectedElement++;
+                }
+                maxConsecutiveLenght = Math.max(maxConsecutiveLenght, expectedElement - element);
+            }
+        }
+        return maxConsecutiveLenght;
+    }
 }
 
