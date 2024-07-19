@@ -5,7 +5,7 @@ import java.math.MathContext;
 
 public class Calculator {
 
-    private static final MathContext MC = new MathContext(10000); // Set precision without rounding mode
+    private static final MathContext MC = new MathContext(10000);
 
     public BigDecimal calculatePi(int iterations) {
         BigDecimal a = BigDecimal.ONE;
