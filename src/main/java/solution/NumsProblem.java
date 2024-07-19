@@ -139,7 +139,7 @@ public class NumsProblem {
 
     public boolean isHappy(int n) {
         do {
-            n = HappyNumber(n);
+            n = happyNumber(n);
         } while (n != 1 && n != 4);
 
         if (n == 1) {
@@ -148,7 +148,7 @@ public class NumsProblem {
         return false;
     }
 
-    static int HappyNumber(int N) {
+    static int happyNumber(int N) {
 
         int sum = 0;
         while (N > 0) {
