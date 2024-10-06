@@ -1,4 +1,4 @@
-package solution;
+package org.example.solution;
 
 import java.util.HashMap;
 import java.util.Locale;
