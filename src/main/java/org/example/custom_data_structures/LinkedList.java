@@ -1,5 +1,6 @@
 package org.example.custom_data_structures;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class LinkedList<E> {
@@ -175,7 +176,28 @@ public class LinkedList<E> {
         return size;
     }
 
-    private class Node<E> {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LinkedList<?> that = (LinkedList<?>) o;
+        if (size != that.size) return false;
+
+        Node<E> thisCurrent = head;
+        LinkedList.Node<?> thatCurrent = that.head;
+        while (thisCurrent != null) {
+            if (!Objects.equals(thisCurrent.element, thatCurrent.element)) {
+                return false;
+            }
+            thisCurrent = thisCurrent.next;
+            thatCurrent = thatCurrent.next;
+        }
+        return true;
+    }
+
+    private static class Node<E> {
+
         private E element;
         private Node<E> next;
 
