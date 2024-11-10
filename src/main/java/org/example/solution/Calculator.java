@@ -12,7 +12,6 @@ public class Calculator {
         BigDecimal b = BigDecimal.ONE.divide(BigDecimal.valueOf(Math.sqrt(2)), MC);
         BigDecimal t = new BigDecimal("0.25");
         BigDecimal p = BigDecimal.ONE;
-
         for (int i = 0; i < iterations; i++) {
             BigDecimal aNext = a.add(b).divide(new BigDecimal(2), MC);
             BigDecimal bNext = a.multiply(b).sqrt(MC);
