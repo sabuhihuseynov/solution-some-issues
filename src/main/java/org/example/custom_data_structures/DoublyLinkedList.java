@@ -1,5 +1,7 @@
 package org.example.custom_data_structures;
 
+import java.util.Objects;
+
 public class DoublyLinkedList<E> {
     private Node head;
     private Node tail;
@@ -168,26 +170,5 @@ public class DoublyLinkedList<E> {
             this.element = element;
         }
     }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        LinkedList<?> that = (LinkedList<?>) o;
-//        if (size != that.size) return false;
-//
-//        LinkedList.Node<?> thisCurrent = head;
-//        LinkedList.Node<?> thatCurrent = that.head;
-//        while (thisCurrent != null) {
-//            if (!Objects.equals(thisCurrent.element, thatCurrent.element)) {
-//                return false;
-//            }
-//            thisCurrent = thisCurrent.next;
-//            thatCurrent = thatCurrent.next;
-//        }
-//        return true;
-//    }
-
 
 }

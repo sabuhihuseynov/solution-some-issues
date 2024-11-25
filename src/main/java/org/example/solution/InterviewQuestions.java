@@ -35,8 +35,8 @@ public class InterviewQuestions {
         int longLen = Integer.MIN_VALUE;
         int beforeZero = 0;
         int afterZero = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == 1) {
+        for (int j : arr) {
+            if (j == 1) {
                 afterZero++;
             } else {
                 longLen = Math.max(longLen, beforeZero + afterZero + 1);
