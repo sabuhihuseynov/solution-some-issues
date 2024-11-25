@@ -1,4 +1,4 @@
-package org.example.solution;
+package org.example.solution.nums_problems;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,8 +7,13 @@ import java.util.HashSet;
 import java.util.List;
 
 
-public class NumsProblem2 {
+public class NumsEasyProblems2 {
 
+    /**
+     * 1ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/partition-array-into-three-parts-with-equal-sum/description/"> Partition Array Into Three Parts With Equal Sum</a>
+     **/
     public boolean canThreePartsEqualSum(int[] arr) {
         int sum = 0;
         for (int n : arr) {
@@ -37,6 +42,11 @@ public class NumsProblem2 {
         return false;
     }
 
+    /**
+     * 1ms
+     * 99.00%
+     * <a href="https://leetcode.com/problems/last-stone-weight/description/"> Last Stone Weight</a>
+     **/
     public int lastStoneWeight(int[] stones) {
         while (stones.length > 1) {
             Arrays.sort(stones);
@@ -53,6 +63,11 @@ public class NumsProblem2 {
         return stones.length == 1 ? stones[0] : 0;
     }
 
+    /**
+     * 2ms
+     * 90.09%
+     * <a href="https://leetcode.com/problems/height-checker/description/"> Last Height Checker</a>
+     **/
     public int heightChecker(int[] heights) {
         int count = 0;
         int[] expected = new int[heights.length];
@@ -66,49 +81,11 @@ public class NumsProblem2 {
         return count;
     }
 
-    public void duplicateZeros(int[] arr) {
-        for (int i = 0; i < arr.length - 1; i++) {
-            if (arr[i] == 0) {
-                for (int j = arr.length - 1; j >= i + 2; j--) {
-                    arr[j] = arr[j - 1];
-                }
-                arr[i + 1] = 0;
-                i = i + 1;
-            }
-        }
-    }
-
-    public int[] distributeCandies(int candies, int k) {
-        int ary[] = new int[k];
-        int val = 1;
-        int indexstore = 0;
-        int count = 0;
-        while (candies > 0) {
-            for (int i = 0; i < k; i++) {
-                candies -= val;
-                if (candies >= 0) {
-                    ary[i] += val;
-                    if (candies == 0) {
-                        break;
-
-                    }
-                } else {
-                    ary[i] += val + candies;
-                    indexstore = i;
-                    break;
-                }
-                val++;
-            }
-            count++;
-        }
-        if (indexstore != 0 && indexstore != k - 1 && count == 0) {
-            for (int i = indexstore; i < k; i++) {
-                ary[i] = 0;
-            }
-        }
-        return ary;
-    }
-
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/relative-sort-array/description/"> Relative Sort Array</a>
+     **/
     public int[] relativeSortArray(int[] arr1, int[] arr2) {
         int[] ans = new int[1001];
         for (int n : arr1) {
@@ -128,6 +105,11 @@ public class NumsProblem2 {
         return arr1;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/n-th-tribonacci-number/description/"> N-th Tribonacci Number</a>
+     **/
     public int tribonacci(int n) {
         if (n == 1 || n == 2) {
             return 1;
@@ -147,6 +129,11 @@ public class NumsProblem2 {
         return t3;
     }
 
+    /**
+     * 7ms
+     * 91.61%
+     * <a href="https://leetcode.com/problems/day-of-the-year/description/"> Day of the Year</a>
+     **/
     public int dayOfYear(String date) {
         int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         int year = Integer.parseInt(date.substring(0, 4));
@@ -163,6 +150,11 @@ public class NumsProblem2 {
         return day;
     }
 
+    /**
+     * 2ms
+     * 98.97%
+     * <a href="https://leetcode.com/problems/unique-number-of-occurrences/description/"> Unique Number of Occurrences</a>
+     **/
     public boolean uniqueOccurrences(int[] arr) {
         HashMap<Integer, Integer> frequencyMap = new HashMap<>();
         HashSet<Integer> check = new HashSet<>();
@@ -178,6 +170,11 @@ public class NumsProblem2 {
         return true;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/check-if-it-is-a-straight-line/description/"> Check If It Is a Straight Line</a>
+     **/
     public boolean checkStraightLine(int[][] coordinates) {
         if (coordinates.length <= 2) {
             return true;
@@ -200,24 +197,11 @@ public class NumsProblem2 {
         return true;
     }
 
-    public int findSpecialInteger(int[] arr) {
-        int specialValue = arr.length / 4;
-        int temp = arr[0];
-        int count = 0;
-        for (int element : arr) {
-            if (temp == element) {
-                count++;
-            } else {
-                count = 1;
-            }
-            if (count > specialValue) {
-                break;
-            }
-            temp = element;
-        }
-        return temp;
-    }
-
+    /**
+     * 1ms
+     * 97.75%
+     * <a href="https://leetcode.com/problems/find-numbers-with-even-number-of-digits/description/"> Find Numbers with Even Number of Digits</a>
+     **/
     public int findNumbers(int[] nums) {
         int count = 0;
         for (int element : nums) {
@@ -233,26 +217,11 @@ public class NumsProblem2 {
         return count;
     }
 
-    public int[] sumZero(int n) {
-        int mid = n / 2;
-        int[] arr = new int[n];
-        int count = 0;
-        int count2 = 0;
-        for (int i = 0; i < n; i++) {
-            if (i < mid) {
-                count--;
-                arr[i] = count;
-            } else if (i == mid && n != (2 * mid)) {
-                count = 0;
-                arr[i] = count;
-            } else {
-                count2++;
-                arr[i] = count2;
-            }
-        }
-        return arr;
-    }
-
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/decompress-run-length-encoded-list/description/"> Decompress Run-Length Encoded List</a>
+     **/
     public int[] decompressRLElist(int[] nums) {
         int arrSize = 0;
         for (int i = 0; i < nums.length; i += 2) {
@@ -269,6 +238,11 @@ public class NumsProblem2 {
         return result;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/convert-integer-to-the-sum-of-two-no-zero-integers/description/"> Convert Integer to the Sum of Two No-Zero Integers</a>
+     **/
     public int[] getNoZeroIntegers(int n) {
         int[] res = new int[2];
 
@@ -295,6 +269,11 @@ public class NumsProblem2 {
         return true;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/maximum-69-number/description/"> Maximum 69 Number</a>
+     **/
     public int maximum69Number(int num) {
         char[] charArray = String.valueOf(num).toCharArray();
         for (int i = 0; i < charArray.length; i++) {
@@ -306,24 +285,11 @@ public class NumsProblem2 {
         return Integer.parseInt(new String(charArray));
     }
 
-    public int[] arrayRankTransform(int[] arr) {
-        HashMap<Integer, Integer> arrayRanks = new HashMap<>();
-        int[] sortedArr = Arrays.copyOf(arr, arr.length);
-        Arrays.sort(sortedArr);
-        int rank = 1;
-        for (int i = 0; i < sortedArr.length; i++) {
-            if (!arrayRanks.containsKey(sortedArr[i])) {
-                arrayRanks.put(sortedArr[i], rank++);
-            }
-        }
-        int[] ranks = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            ranks[i] = arrayRanks.get(arr[i]);
-        }
-
-        return ranks;
-    }
-
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/description/"> Count Negative Numbers in a Sorted Matrix</a>
+     **/
     public int countNegatives(int[][] grid) {
         int countOfNeg = 0;
         for (int i = 0; i < grid.length; i++) {
@@ -337,12 +303,17 @@ public class NumsProblem2 {
         return countOfNeg;
     }
 
+    /**
+     * 1ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/description/"> How Many Numbers Are Smaller Than the Current Number</a>
+     **/
     public int[] smallerNumbersThanCurrent(int[] nums) {
         int[] count = new int[101];
         int n = nums.length;
 
-        for (int i = 0; i < n; i++) {
-            count[nums[i]]++;
+        for (int num : nums) {
+            count[num]++;
         }
 
         for (int i = 1; i <= 100; i++) {
@@ -362,6 +333,11 @@ public class NumsProblem2 {
         return result;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/lucky-numbers-in-a-matrix/description/"> Lucky Numbers in a Matrix</a>
+     **/
     public List<Integer> luckyNumbers(int[][] matrix) {
         int row = matrix.length;
         int col = matrix[0].length;
@@ -369,7 +345,7 @@ public class NumsProblem2 {
         for (int i = 0; i < row; i++) {
             int minColIndex = minColIndexInRow(matrix, i, col);
             int luckyNum = matrix[i][minColIndex];
-            if (checkIfMaxInCol(matrix, minColIndex, luckyNum, row)) {
+            if (Boolean.TRUE.equals(checkIfMaxInCol(matrix, minColIndex, luckyNum, row))) {
                 ans.add(luckyNum);
             }
         }
@@ -377,7 +353,8 @@ public class NumsProblem2 {
     }
 
     private int minColIndexInRow(int[][] matrix, int i, int col) {
-        int j = 0, min = matrix[i][j];
+        int j = 0;
+        int min = matrix[i][j];
         int minColIndex = 0;
         for (j = 1; j < col; j++) {
             if (matrix[i][j] < min) {
@@ -397,6 +374,11 @@ public class NumsProblem2 {
         return true;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/create-target-array-in-the-given-order/description/"> Create Target Array in the Given Order</a>
+     **/
     public int[] createTargetArray(int[] nums, int[] index) {
         List<Integer> ans = new ArrayList<>();
         int[] target = new int[nums.length];
@@ -410,6 +392,11 @@ public class NumsProblem2 {
         return target;
     }
 
+    /**
+     * 1ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/find-lucky-integer-in-an-array/description/"> Create Target Array in the Given OrderFind Lucky Integer in an Array</a>
+     **/
     public int findLucky(int[] arr) {
         int[] cnt = new int[501];
         for (int a : arr) {
@@ -423,39 +410,11 @@ public class NumsProblem2 {
         return -1;
     }
 
-    public int minStartValue(int[] nums) {
-        int sum = 0;
-        int min = sum;
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            if (sum < min) {
-                min = sum;
-            }
-        }
-        return Math.abs(min) + 1;
-    }
-
-    public List<Integer> minSubsequence(int[] nums) {
-        List<Integer> list = new ArrayList<>();
-        Arrays.sort(nums);
-
-        int s = 0;
-        for (int i : nums) {
-            s += i;
-        }
-        int temp = 0;
-        for (int i = nums.length - 1; i >= 0; i--) {
-            temp += nums[i];
-            if (temp > s - temp) {
-                list.add(nums[i]);
-                return list;
-            } else {
-                list.add(nums[i]);
-            }
-        }
-        return list;
-    }
-
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/"> Kids With the Greatest Number of Candies</a>
+     **/
     public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
         List<Boolean> ifKidHaveMaxCandies = new ArrayList<>(candies.length);
         int max = findMax(candies);
@@ -480,6 +439,11 @@ public class NumsProblem2 {
         return max;
     }
 
+    /**
+     * 1ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/check-if-all-1s-are-at-least-length-k-places-away/description/"> Check If All 1's Are at Least Length K Places Away</a>
+     **/
     public boolean kLengthApart(int[] nums, int k) {
         int numberOfZerosBetweenOnes = 0;
         if (nums[0] == 0) {
@@ -499,20 +463,11 @@ public class NumsProblem2 {
         return true;
     }
 
-    public int maxPower(String s) {
-        int result = 1, count = 1;
-
-        for (int i = 0; i < s.length() - 1; i++) {
-            if (s.charAt(i) == s.charAt(i + 1)) {
-                count++;
-            } else {
-                result = Math.max(result, count);
-                count = 1;
-            }
-        }
-        return Math.max(result, count);
-    }
-
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/number-of-students-doing-homework-at-a-given-time/description/"> Number of Students Doing Homework at a Given Time</a>
+     **/
     public int busyStudent(int[] startTime, int[] endTime, int queryTime) {
         int count = 0;
         for (int i = 0; i < startTime.length; i++) {
@@ -521,20 +476,6 @@ public class NumsProblem2 {
             }
         }
         return count;
-    }
-
-    public boolean canBeEqual(int[] target, int[] arr) {
-        int[] count = new int[1001];
-        for (int i = 0; i < target.length; i++) {
-            count[target[i]]++;
-            count[arr[i]]--;
-        }
-        for (int i = 0; i < 1001; i++) {
-            if (count[i] != 0) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public int maxProduct(int[] nums) {
@@ -551,16 +492,11 @@ public class NumsProblem2 {
         return (largest - 1) * (secondLargest - 1);
     }
 
-    public int[] shuffle(int[] nums, int n) {
-        int[] shuffledArr = new int[nums.length];
-
-        for (int i = 0, j = 0; i < nums.length / 2; i++) {
-            shuffledArr[j++] = nums[i];
-            shuffledArr[j++] = nums[i + n];
-        }
-        return shuffledArr;
-    }
-
+    /**
+     * 1ms
+     * 98.80%
+     * <a href="https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/description/"> Final Prices With a Special Discount in a Shop</a>
+     **/
     public int[] finalPrices(int[] prices) {
         for (int i = 0; i < prices.length - 1; i++) {
             for (int j = i + 1; j < prices.length; j++) {
@@ -573,6 +509,11 @@ public class NumsProblem2 {
         return prices;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/running-sum-of-1d-array/description/"> Running Sum of 1d Array</a>
+     **/
     public int[] runningSum(int[] nums) {
         int[] runningArr = new int[nums.length];
         int sum = nums[0];
@@ -584,6 +525,11 @@ public class NumsProblem2 {
         return runningArr;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/xor-operation-in-an-array/description/"> XOR Operation in an Array</a>
+     **/
     public int xorOperation(int n, int start) {
         int[] nums = new int[n];
         int elementXOR = start;
@@ -594,6 +540,11 @@ public class NumsProblem2 {
         return elementXOR;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/description/"> Average Salary Excluding the Minimum and Maximum Salary</a>
+     **/
     public double average(int[] salary) {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
@@ -617,6 +568,11 @@ public class NumsProblem2 {
         return sum / count;
     }
 
+    /**
+     * 2ms
+     * 96.29%
+     * <a href="https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/description/"> Can Make Arithmetic Progression From Sequence</a>
+     **/
     public boolean canMakeArithmeticProgression(int[] arr) {
         Arrays.sort(arr);
         int diff = arr[1] - arr[0];
@@ -628,23 +584,11 @@ public class NumsProblem2 {
         return true;
     }
 
-    public int maxArea(int[] height) {
-        int area = 0;
-        int left = 0;
-        int right = height.length - 1;
-        while (left < right) {
-            int minHeight = Math.min(height[left], height[right]);
-            area = Math.max(area, (right - left) * minHeight);
-            while (left < right && height[left] <= minHeight) {
-                left++;
-            }
-            while (left < right && height[right] <= minHeight) {
-                right--;
-            }
-        }
-        return area;
-    }
-
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/missing-number/description/"> Missing Number</a>
+     **/
     public int missingNumber(int[] nums) {
         int[] numbersCountArr = new int[nums.length + 1];
         for (int num : nums) {
@@ -658,8 +602,11 @@ public class NumsProblem2 {
         return -1;
     }
 
-
-
+    /**
+     * 27ms
+     * 76.13%
+     * <a href="https://leetcode.com/problems/longest-consecutive-sequence/description/"> Longest Consecutive Sequence</a>
+     **/
     public int longestConsecutive(int[] nums) {
 
         HashSet<Integer> set = new HashSet<>();
@@ -680,6 +627,11 @@ public class NumsProblem2 {
         return maxConsecutiveLenght;
     }
 
+    /**
+     * 3ms
+     * 72.35%
+     * <a href="https://leetcode.com/problems/valid-palindrome/description/"> Valid Palindrome</a>
+     **/
     public boolean isPalindrome(int x) {
         if (x < 0 || (x % 10 == 0 && x != 0)) {
             return false;
@@ -690,6 +642,135 @@ public class NumsProblem2 {
             x /= 10;
         }
         return x == revertedNumber || x == revertedNumber / 10;
+    }
+
+    /**
+     * 1ms 97,14%
+     * <a href="https://leetcode.com/problems/concatenation-of-array/description/"> Concatenation of Array</a>
+     **/
+    public int[] getConcatenation(int[] nums) {
+        int n = nums.length * 2;
+        int[] result = new int[n];
+        int j = nums.length;
+        for (int i = 0; i < nums.length; i++) {
+            result[i] = nums[i];
+            result[j++] = nums[i];
+        }
+        return result;
+    }
+
+    /**
+     * 0ms 100.00%
+     * <a href="https://leetcode.com/problems/concatenation-of-array/description/"> Concatenation of Array</a>
+     **/
+    public int[] getConcatenationn(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[2 * n];
+        System.arraycopy(nums, 0, ans, 0, n);
+        System.arraycopy(nums, 0, ans, n, n);
+        return ans;
+    }
+
+    /**
+     * 0ms 99.19%
+     * <a href="https://leetcode.com/problems/build-array-from-permutation/description/"> Build array from permutation</a>
+     **/
+    public int[] buildArray(int[] nums) {
+        int[] ans = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            ans[i] = nums[nums[i]];
+        }
+        return ans;
+    }
+
+    /**
+     * 1ms 100.00%
+     * <a href="https://leetcode.com/problems/the-two-sneaky-numbers-of-digitville/description/"> The Two Sneaky Numbers of Digitville</a>
+     **/
+    public int[] getSneakyNumbers(int[] nums) {
+        int j = 0;
+        int[] uniqueNumbers = new int[nums.length - 2];
+        int[] ans = new int[2];
+        for (int num : nums) {
+            uniqueNumbers[num]++;
+            if (uniqueNumbers[num] == 2) {
+                ans[j++] = num;
+            }
+        }
+        return ans;
+    }
+
+
+    /**
+     * 0ms 100.00%
+     * <a href="https://leetcode.com/problems/longest-common-prefix/description/"> Longest Common Prefix</a>
+     **/
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0) {
+            return "";
+        }
+        String prefix = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            while (strs[i].indexOf(prefix) != 0) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+            }
+        }
+        return prefix;
+    }
+
+    /**
+     * 0ms 100.00%
+     * <a href="https://leetcode.com/problems/ransom-note/description/"> Ransom Note</a>
+     **/
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) {
+            return false;
+        }
+        int[] letters = new int[26];
+        for (char c : ransomNote.toCharArray()) {
+            int index = magazine.indexOf(c, letters[c % 26]);
+            if (index == -1) {
+                return false;
+            }
+            letters[c % 26] = index + 1;
+        }
+        return true;
+    }
+
+    /**
+     * 0ms 100.00%
+     * <a href="https://leetcode.com/problems/shuffle-string/description/"> Shuffle String</a>
+     **/
+    public String restoreString(String s, int[] indices) {
+        char[] shuffledArr = new char[indices.length];
+        for (int i = 0; i < indices.length; i++) {
+            shuffledArr[indices[i]] = s.charAt(i);
+        }
+        return new String(shuffledArr);
+    }
+
+    /**
+     * 1ms 100.00%
+     * <a href="https://leetcode.com/problems/snake-in-matrix/description/"> Snake in Matrix</a>
+     **/
+    public int finalPositionOfSnake(int n, List<String> commands) {
+        int position = 0;
+        for (String command : commands) {
+            switch (command.charAt(0)) {
+                case 'U':
+                    position -= n;
+                    break;
+                case 'D':
+                    position += n;
+                    break;
+                case 'L':
+                    position--;
+                    break;
+                case 'R':
+                    position++;
+            }
+        }
+        return position;
     }
 }
 

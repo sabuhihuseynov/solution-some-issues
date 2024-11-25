@@ -1,19 +1,40 @@
-package org.example.solution;
+package org.example.solution.nums_problems;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class NumsProblem {
+public class NumsEasyProblems {
+
+    /**
+     * 4ms
+     * 72.61%
+     * <a href="https://leetcode.com/problems/roman-to-integer/description/"> Roman to Integer</a>
+     **/
+    public int romanToInt(String s) {
+        int total = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int s1 = value(s.charAt(i));
+            if (i + 1 < s.length()) {
+                int s2 = value(s.charAt(i + 1));
+                if (s1 >= s2) {
+                    total = total + s1;
+                } else {
+                    total = total - s1;
+                }
+            } else {
+                total = total + s1;
+            }
+        }
+        return total;
+    }
 
     int value(char r) {
         if (r == 'I')
@@ -33,26 +54,6 @@ public class NumsProblem {
         else return -1;
     }
 
-    // Leetcode problem 13.
-    public int romanToInt(String s) {
-        int total = 0;
-        for (int i = 0; i < s.length(); i++) {
-            int s1 = value(s.charAt(i));
-            if (i + 1 < s.length()) {
-                int s2 = value(s.charAt(i + 1));
-                if (s1 >= s2) {
-                    total = total + s1;
-                } else {
-                    total = total - s1;
-                }
-            } else {
-                total = total + s1;
-            }
-        }
-        return total;
-    }
-
-
     public void isPrimeNumber() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -66,7 +67,12 @@ public class NumsProblem {
         bufferedReader.close();
     }
 
-    public int[] plusOne(int digits[]) {
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/plus-one/description/"> Plus One</a>
+     **/
+    public int[] plusOne(int[] digits) {
         for (int i = digits.length - 1; i >= 0; i--) {
             if (digits[i] < 9) {
                 digits[i]++;
@@ -79,6 +85,11 @@ public class NumsProblem {
         return digits;
     }
 
+    /**
+     * 1ms
+     * 99.93%
+     * <a href="https://leetcode.com/problems/add-binary/description/"> Add Binary</a>
+     **/
     public String addBinary(String a, String b) {
         StringBuilder res = new StringBuilder();
         int i = a.length() - 1;
@@ -95,6 +106,11 @@ public class NumsProblem {
         return res.reverse().toString();
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/climbing-stairs/description/"> Climbing Stairs</a>
+     **/
     public int climbStairs(int n) {
         if (n == 1) return 1;
         if (n == 2) return 2;
@@ -109,65 +125,70 @@ public class NumsProblem {
         return a[n - 1];
     }
 
-    public int maxProfit(int[] prices) {
-        int lsf = Integer.MAX_VALUE;
-        int op = 0;
-        int pist = 0;
-
-        for (int i = 0; i < prices.length; i++) {
-            if (prices[i] < lsf) {
-                lsf = prices[i];
-            }
-            pist = prices[i] - lsf;
-            if (op < pist) {
-                op = pist;
-            }
-        }
-        return op;
-
-    }
-
+    /**
+     * 1ms
+     * 99.84%
+     * <a href="https://leetcode.com/problems/single-number/description/"> Single Number</a>
+     **/
     public int singleNumber(int[] nums) {
-        int ans = 0; //since XOR with 0 returns same number
-        for (int i = 0; i < nums.length; i++) {
-            ans ^= nums[i];  // ans = (ans) XOR (array element at i)
+        int ans = 0;
+        for (int num : nums) {
+            ans ^= num;
         }
         return ans;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/happy-number/description/"> Happy Number</a>
+     **/
     public boolean isHappy(int n) {
         do {
             n = happyNumber(n);
         } while (n != 1 && n != 4);
 
-        if (n == 1) {
-            return true;
-        }
-        return false;
+        return n == 1;
     }
 
-    static int happyNumber(int N) {
-
+    public int happyNumber(int n) {
         int sum = 0;
-        while (N > 0) {
-            int Rem = N % 10;
-            N /= 10;
-            sum += (Rem * Rem);
+        while (n > 0) {
+            int temp = n % 10;
+            n /= 10;
+            sum += (temp * temp);
         }
         return sum;
     }
 
+    /**
+     * 1ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/contains-duplicate/"> Contains Duplicate</a>
+     **/
     public boolean containsDuplicate(int[] nums) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (map.containsKey(nums[i])) {
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i - 1] == nums[i]) {
                 return true;
+            } else if (nums[i - 1] > nums[i]) {
+                int temp = nums[i - 1];
+                for (int j = (i - 2); j >= 0; j--) {
+                    if (nums[i] == nums[j]) {
+                        return true;
+                    }
+                }
+                nums[i - 1] = nums[i];
+                nums[i] = temp;
             }
-            map.put(nums[i], 1);
         }
         return false;
     }
 
+    /**
+     * 1ms
+     * 45.72%
+     * <a href="https://leetcode.com/problems/power-of-two/description/"> Power of Two</a>
+     **/
     public boolean isPowerOfTwo(int n) {
         if (n == 1) return true;
         if (n < 1) return false;
@@ -177,46 +198,50 @@ public class NumsProblem {
         return (isPowerOfTwo(n / 2));
     }
 
+    /**
+     * 1ms
+     * 48.52%
+     * <a href="https://leetcode.com/problems/ugly-number/description/"> Ugly Number</a>
+     **/
     public boolean isUgly(int n) {
         if (n <= 0) {
             return false;
         }
-        while (n > 0 && n % 5 == 0) {
+        while (n % 5 == 0) {
             n = n / 5;
         }
-        while (n > 0 && n % 3 == 0) {
+        while (n % 3 == 0) {
             n = n / 3;
         }
-        while (n > 0 && n % 2 == 0) {
+        while (n % 2 == 0) {
             n = n / 2;
         }
         return n == 1;
     }
 
-    public void moveZeroes(int[] nums) {
-        int n = nums.length;
-        for (int i = 0; i < n; i++) {
-            if (nums[i] != 0) {
-                continue;
-            } else {
-                int j = i;
-                while (j < n - 1 && nums[j] == 0) {
-                    j++;
-                }
-                int temp = nums[i];
-                nums[i] = nums[j];
-                nums[j] = temp;
+    /**
+     * 2ms
+     * 84.15%
+     * <a href="https://leetcode.com/problems/move-zeroes/"> Move Zeroes</a>
+     **/
+    public void moveZeroes(int[] arr) {
+        int j = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                arr[j] = arr[i];
+                j++;
             }
+        }
+        for (int i = j; i < arr.length; i++) {
+            arr[i] = 0;
         }
     }
 
-    public boolean canWinNim(int n) {
-        if (n % 4 == 0)
-            return false;
-        else
-            return true;
-    }
-
+    /**
+     * 2ms
+     * 96.26%
+     * <a href="https://leetcode.com/problems/intersection-of-two-arrays/description/"> Intersection of Two Arrays</a>
+     **/
     public int[] intersection(int[] nums1, int[] nums2) {
         Set<Integer> s = new HashSet<>();
         for (int num : nums1) {
@@ -236,6 +261,11 @@ public class NumsProblem {
         return res;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/valid-perfect-square/description/"> Valid Perfect Square</a>
+     **/
     public boolean isPerfectSquare(int num) {
         if (num == 1) return true;
         long i = 2;
@@ -255,54 +285,11 @@ public class NumsProblem {
         return false;
     }
 
-    public int countSegments(String s) {
-        String[] strings = s.split(" ");
-        int count = 0;
-        for (String string : strings) {
-            if (!string.equals("")) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public int arrangeCoins(int n) {
-        int l = 0, r = n;
-        int x, s;
-        while (l <= r) {
-            x = l + (r - l) / 2;
-            s = x * (x + 1) / 2;
-            if (s == n) {
-                return x;
-            }
-            if (n < s) {
-                r = x - 1;
-            } else {
-                l = x + 1;
-            }
-        }
-        return r;
-    }
-
-    public int islandPerimeter(int[][] grid) {
-        if (grid == null || grid.length == 0 || grid[0].length == 0)// base case
-            return 0;
-
-        int count = 0;
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] == 1) {
-                    count += 4;
-                    if (j - 1 >= 0 && grid[i][j - 1] == 1)
-                        count -= 2;
-                    if (i - 1 >= 0 && grid[i - 1][j] == 1)
-                        count -= 2;
-                }
-            }
-        }
-        return count;
-    }
-
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/number-complement/description/"> Number Complement</a>
+     **/
     public int findComplement(int num) {
         int s = 0;
         int i = 0;
@@ -312,11 +299,15 @@ public class NumsProblem {
             }
             i++;
             num = (num >> 1);
-
         }
         return s;
     }
 
+    /**
+     * 1ms
+     * 96.52%
+     * <a href="https://leetcode.com/problems/perfect-number/description/"> Perfect Number</a>
+     **/
     public boolean checkPerfectNumber(int num) {
         int sum = 1;
         if (num == 1) {
@@ -327,18 +318,9 @@ public class NumsProblem {
                 sum += i + num / i;
             }
         }
-        if (sum == num) {
-            return true;
-        }
-        return false;
+        return sum == num;
     }
 
-    public Integer func(Integer a, Integer b) {
-        if (b == 0) return 1;
-        Integer temp = func(a, b / 2);
-        if (b % 2 != 0) return temp * temp * a;
-        else return temp * temp;
-    }
 
     public int findLowestStartingStair(List<Integer> jumps) {
         int currentStair = 0;
@@ -351,69 +333,6 @@ public class NumsProblem {
             }
         }
         return Math.max(1, 1 - minStair);
-    }
-
-    public void sort(int arr[]) {
-        int n = arr.length;
-        for (int i = 0; i < n; ++i) {
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j = j - 1;
-            }
-            arr[j + 1] = key;
-        }
-    }
-
-    public int maximumProduct(int[] nums) {
-        if (nums.length > 3) {
-            for (int i = 0; i <= 2; i++) {
-                int temp;
-                for (int j = 0; j <= nums.length - 2; j++) {
-                    if (nums[j] > nums[j + 1]) {
-                        temp = nums[j];
-                        nums[j] = nums[j + 1];
-                        nums[j + 1] = temp;
-                    }
-                }
-            }
-        }
-        return nums[nums.length - 1] * nums[nums.length - 2] * nums[nums.length - 3];
-    }
-
-    public double findMaxAverage(int[] arr, int k) {
-        double maxAvg = Integer.MIN_VALUE;
-        double currAvg = 0;
-        double currsum = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-
-            currsum += arr[i];
-
-            if (i >= k - 1) {
-                currAvg = currsum / k;
-                maxAvg = Math.max(maxAvg, currAvg);
-                currsum -= arr[i - (k - 1)];
-            }
-        }
-        return maxAvg;
-    }
-
-    public int[] findErrorNums(int[] nums) {
-        int ans[] = {-1, -1};
-        for (int i = 0; i < nums.length; i++) {
-            int curr = Math.abs(nums[i]) - 1;
-            if (nums[curr] < 0)
-                ans[0] = curr + 1;
-            else
-                nums[curr] = nums[curr] * -1;
-        }
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > 0)
-                ans[1] = i + 1;
-        }
-        return ans;
     }
 
     public void devZoneNumberOfAges() {
@@ -502,7 +421,6 @@ public class NumsProblem {
     }
 
     public void staircase(int n) {
-
         for (int i = 1; i <= n; i++) {
             if (i != n) {
                 for (int j = i; j < n; j++) {
@@ -521,7 +439,7 @@ public class NumsProblem {
         list.add(1, 0);
         for (int i = 0; i < 3; i++) {
             if (a.get(i) > b.get(i)) {
-                list.set(0, list.get(0) + 1);
+                list.set(0, list.getFirst() + 1);
             } else if (a.get(i) < b.get(i)) {
                 list.set(1, list.get(1) + 1);
             }
@@ -582,58 +500,22 @@ public class NumsProblem {
     }
 
     public long taskOfPairing(List<Long> freq) {
-
         long result = 0;
 
         for (int i = 0; i < freq.size(); i++) {
             if (freq.get(i) == 0) {
                 continue;
             }
-            long qaliq = freq.get(i) % 2;
-            long tam = freq.get(i) / 2;
-            if (qaliq == 0) {
-                result += tam;
+            long mod = freq.get(i) % 2;
+            long n = freq.get(i) / 2;
+            if (mod == 0) {
+                result += n;
             } else if (i != freq.size() - 1 && freq.get(i + 1) != 0) {
-                result += qaliq + tam;
+                result += mod + n;
                 freq.set(i + 1, freq.get(i + 1) - 1);
-            } else result += tam;
+            } else result += n;
         }
         return result;
-    }
-
-
-    public static int pivotIndex(int[] nums) {
-        int totalSum = 0;
-        int leftsum = 0;
-        for (int ele : nums)
-            totalSum += ele;
-        for (int i = 0; i < nums.length; leftsum += nums[i++])
-            if (leftsum * 2 == totalSum - nums[i])
-                return i;
-        return -1;
-    }
-
-    public static List<Integer> selfDividingNumbers(int left, int right) {
-        List<Integer> selfDividingNumbers = new ArrayList<>();
-        for (int num = left; num <= right; num++) {
-            if (isDividingNumber(num)) {
-                selfDividingNumbers.add(num);
-            }
-        }
-        return selfDividingNumbers;
-    }
-
-    public static boolean isDividingNumber(int tempNumber) {
-        int temp;
-        int number = tempNumber;
-        while (tempNumber != 0) {
-            temp = tempNumber % 10;
-            tempNumber = tempNumber / 10;
-            if (temp == 0 || number % temp != 0) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public int dominantIndex(int[] nums) {
@@ -653,6 +535,11 @@ public class NumsProblem {
         return maxindex;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/toeplitz-matrix/description/"> Toeplitz Matrix</a>
+     **/
     public boolean isToeplitzMatrix(int[][] matrix) {
         for (int i = 1; i < matrix.length; i++) {
             for (int j = 1; j < matrix[0].length; j++) {
@@ -664,28 +551,11 @@ public class NumsProblem {
         return true;
     }
 
-    public static double largestTriangleArea(int[][] points) {
-        double ans = 0;
-        int n = points.length;
-
-        for (int i = 0; i < n; i++)
-            for (int j = i + 1; j < n; j++)
-                for (int k = j + 1; k < n; k++)
-                    ans = Math.max(ans, Math.abs(area(points[i], points[j], points[k])));
-        return ans;
-    }
-
-    public static double area(int[] x1, int[] x2, int[] x3) {
-        int t1 = x1[0] * (x2[1] - x3[1]);
-        int t2 = x2[0] * (x3[1] - x1[1]);
-        int t3 = x3[0] * (x1[1] - x2[1]);
-        return (double) (t1 + t2 + t3) / 2;
-    }
-
-    public static boolean isVowel(char c) {
-        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
-    }
-
+    /**
+     * 2ms
+     * 96.14%
+     * <a href="https://leetcode.com/problems/lemonade-change/description/"> Lemonade Change</a>
+     **/
     boolean lemonadeChange(int[] bills) {
 
         int count5 = 0;
@@ -693,30 +563,35 @@ public class NumsProblem {
         int count20 = 0;
 
         for (int bill : bills) {
-            // if encounter 5 then collect it simply
-            if (bill == 5) count5 += 5;
-
-            else if (bill == 10) {
-                if (count5 >= 5) {
-                    count5 -= 5;
-                    count10 += 10;
-                } else return false;
-            } else {
-
-                if (count5 >= 5 && count10 >= 10) {
-                    count5 -= 5;
-                    count10 -= 10;
-                    count20 += 20;
-                } else if (count5 >= 15) {
-                    count5 -= 15;
-                    count20 += 20;
-                } else return false;
+            switch (bill) {
+                case 5 -> count5 += 5;
+                case 10 -> {
+                    if (count5 >= 5) {
+                        count5 -= 5;
+                        count10 += 10;
+                    } else return false;
+                }
+                default -> {
+                    if (count5 >= 5 && count10 >= 10) {
+                        count5 -= 5;
+                        count10 -= 10;
+                        count20 += 20;
+                    } else if (count5 >= 15) {
+                        count5 -= 15;
+                        count20 += 20;
+                    } else return false;
+                }
             }
 
         }
         return true;
     }
 
+    /**
+     * 1ms
+     * 28.85%
+     * <a href="https://leetcode.com/problems/transpose-matrix/description/">  Transpose Matrix</a>
+     **/
     public int[][] transpose(int[][] matrix) {
         int[][] transpose = new int[matrix[0].length][matrix.length];
         for (int i = 0; i < matrix.length; i++) {
@@ -727,9 +602,15 @@ public class NumsProblem {
         return transpose;
     }
 
+    /**
+     * 1ms
+     * 45.60%
+     * <a href="https://leetcode.com/problems/binary-gap/description/">  Binary Gap</a>
+     **/
     public int binaryGap(int n) {
         String bin = Integer.toBinaryString(n);
-        int idx = 0, max = -1;
+        int idx = 0;
+        int max = -1;
         for (int i = 0; i < bin.length(); i++) {
             char c = bin.charAt(i);
             if (c == '1') {
@@ -743,31 +624,39 @@ public class NumsProblem {
         return max;
     }
 
+    /**
+     * 3ms
+     * 99.84%
+     * <a href="https://leetcode.com/problems/fair-candy-swap/description/"> Fair Candy Swap</a>
+     **/
     public int[] fairCandySwap(int[] aliceSizes, int[] bobSizes) {
         int aum = 0;
         boolean[] inAlice = new boolean[100001];
-        for (int i = 0; i < aliceSizes.length; i++) {
-            aum += aliceSizes[i];
-            inAlice[aliceSizes[i]] = true;
+        for (int aliceSize : aliceSizes) {
+            aum += aliceSize;
+            inAlice[aliceSize] = true;
         }
         int bum = 0;
-        for (int i = 0; i < bobSizes.length; i++) {
-            bum += bobSizes[i];
+        for (int bobSize : bobSizes) {
+            bum += bobSize;
         }
         int diff = aum - bum;
         int[] ans = new int[2];
-        for (int i = 0; i < bobSizes.length; i++) {
-            int target = bobSizes[i] + diff / 2;
-            if (target > 0 && target < 100001) {
-                if (inAlice[target]) {
-                    ans = new int[]{target, bobSizes[i]};
-                    return ans;
-                }
+        for (int bobSize : bobSizes) {
+            int target = bobSize + diff / 2;
+            if (target > 0 && target < 100001 && inAlice[target]) {
+                ans = new int[]{target, bobSize};
+                return ans;
             }
         }
         return ans;
     }
 
+    /**
+     * 2ms
+     * 65.36%
+     * <a href="https://leetcode.com/problems/monotonic-array/description/"> Monotonic Array</a>
+     **/
     public boolean isMonotonic(int[] nums) {
         boolean increaseMon = false;
         boolean decreaseMon = false;
@@ -788,6 +677,11 @@ public class NumsProblem {
         return true;
     }
 
+    /**
+     * 1ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/valid-mountain-array/description/"> Valid Mountain Array</a>
+     **/
     public boolean validMountainArray(int[] arr) {
         int leg = arr.length;
         int maxIndex = 0;
@@ -812,66 +706,66 @@ public class NumsProblem {
         return true;
     }
 
+    /**
+     * 0ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/n-repeated-element-in-size-2n-array/description/"> N-Repeated Element in Size 2N Array</a>
+     **/
     public int repeatedNTimes(int[] nums) {
-        int n = nums.length;
-        Arrays.sort(nums);
-        int ans = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if (nums[i] == nums[i + 1]) {
-                ans = nums[i];
-                break;
+        HashSet<Integer> set = new HashSet<>();
+        for (int n : nums) {
+            if (set.contains(n)) {
+                return n;
             }
-        }
-        return ans;
-    }
-
-    public int largestPerimeter(int[] nums) {
-        int n = nums.length;
-
-        Arrays.sort(nums);
-
-        for (int k = n - 1; k >= 2; k--) {
-            int c = nums[k];
-            int b = nums[k - 1];
-            int a = nums[k - 2];
-
-            if (this.isValid(a, b, c)) {
-                return a + b + c;
-            }
+            set.add(n);
         }
         return 0;
     }
 
-    private boolean isValid(int a, int b, int c) {
-        return a + b > c;
-    }
-
+    /**
+     * 1ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/squares-of-a-sorted-array/description/">  Squares of a Sorted Array</a>
+     **/
     public int[] sortedSquares(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-            nums[i] = nums[i] * nums[i];
+        int left = 0;
+        int right = nums.length - 1;
+        int[] result = new int[nums.length];
+        for (int i = right; i >= 0; i--) {
+            if (Math.abs(nums[left]) > Math.abs(nums[right])) {
+                result[i] = nums[left] * nums[left];
+                left++;
+            } else {
+                result[i] = nums[right] * nums[right];
+                right--;
+            }
         }
-        Arrays.sort(nums);
-        return nums;
+        return result;
     }
 
-    public List<Integer> addToArrayForm(int[] num, int K) {
+    public List<Integer> addToArrayForm(int[] num, int k) {
         List<Integer> res = new LinkedList<>();
         for (int i = num.length - 1; i >= 0; --i) {
-            res.add(0, (num[i] + K) % 10);
-            K = (num[i] + K) / 10;
+            res.addFirst((num[i] + k) % 10);
+            k = (num[i] + k) / 10;
         }
-        while (K > 0) {
-            res.add(0, K % 10);
-            K /= 10;
+        while (k > 0) {
+            res.addFirst(k % 10);
+            k /= 10;
         }
         return res;
     }
 
+    /**
+     * 2ms
+     * 99.77%
+     * <a href="https://leetcode.com/problems/find-the-town-judge/description/"> Find the Town Judge</a>
+     **/
     public int findJudge(int n, int[][] trust) {
         int indegree[] = new int[n + 1];
 
-        for (int i = 0; i < trust.length; i++) {
-            indegree[trust[i][1]]++;
+        for (int[] ints : trust) {
+            indegree[ints[1]]++;
         }
         int judge = -1;
         for (int i = 1; i <= n; i++) {
@@ -880,13 +774,18 @@ public class NumsProblem {
                 break;
             }
         }
-        for (int i = 0; i < trust.length; i++) {
-            if (trust[i][0] == judge)
+        for (int[] ints : trust) {
+            if (ints[0] == judge)
                 return -1;
         }
         return judge;
     }
 
+    /**
+     * 2ms
+     * 94.95%
+     * <a href="https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/description/"> Maximize Sum Of Array After K Negations</a>
+     **/
     public int largestSumAfterKNegations(int[] nums, int k) {
         int[] numbers = new int[201];
         int sum = 0;

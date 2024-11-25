@@ -1,4 +1,4 @@
-package org.example.solution;
+package org.example.solution.algorithms;
 
 public class SortingAlgorithms {
 
