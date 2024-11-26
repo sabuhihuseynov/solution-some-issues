@@ -1,5 +1,7 @@
 package org.example.solution.nums_problems;
 
+import java.util.Arrays;
+
 public class NumsMediumProblems {
 
     /**
@@ -49,5 +51,46 @@ public class NumsMediumProblems {
         }
         return sb.toString();
     }
+
+    /**
+     * <b>MEDIUM</b>
+     * 1 ms 100.00%
+     * <a href="https://leetcode.com/problems/find-champion-ii/description/?envType=daily-question&envId=2024-11-26"> 2924. Find Champion II</a>
+     **/
+    public int findChampion(int n, int[][] edges) {
+        boolean[] isUndefeated = new boolean[n];
+        Arrays.fill(isUndefeated, true);
+
+        for (int[] edge : edges) {
+            var loser = edge[1];
+            isUndefeated[loser] = false;
+        }
+
+        var champion = -1;
+        var championCount = 0;
+
+        for (int team = 0; team < n; team++) {
+            if (isUndefeated[team]) {
+                championCount++;
+                champion = team;
+            }
+        }
+        return championCount == 1 ? champion : -1;
+    }
+
+    /**
+     * <b>MEDIUM</b>
+     * 3 ms 100.00%
+     * <a href="https://leetcode.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/description/"> Partitioning Into Minimum Number Of Deci-Binary Numbers</a>
+     **/
+    public int minPartitions(String n) {
+        for (int num = 9; num > 0; num--) {
+            if (n.contains(String.valueOf(num))) {
+                return num;
+            }
+        }
+        return 0;
+    }
+
 
 }
