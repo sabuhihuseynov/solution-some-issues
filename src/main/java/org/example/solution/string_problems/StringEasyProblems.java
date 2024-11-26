@@ -607,8 +607,8 @@ public class StringEasyProblems {
     public int removeDuplicates(int[] nums) {
         int slow = 0;
         int fast = 0;
-        for( fast = 0; fast < nums.length; fast++){
-            if(nums[slow]!=nums[fast])
+        for (fast = 0; fast < nums.length; fast++) {
+            if (nums[slow] != nums[fast])
                 nums[++slow] = nums[fast];
         }
         return ++slow;
@@ -824,5 +824,38 @@ public class StringEasyProblems {
     public String[] splitStringBy2Characters(String str) {
         return str.split("(?<=\\G.{2})");
     }
+
+    /**
+     * 1ms
+     * 99.69%
+     * <a href="https://leetcode.com/problems/score-of-a-string/description/"> Score of a String</a>
+     **/
+    public int scoreOfString(String s) {
+        int sum = 0;
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length - 1; i++) {
+            sum += Math.abs(chars[i] - chars[i + 1]);
+        }
+        return sum;
+    }
+
+    /**
+     * 1ms
+     * 100.00%
+     * <a href="https://leetcode.com/problems/convert-date-to-binary/description/"> Convert Date to Binary</a>
+     **/
+    public String convertDateToBinary(String date) {
+        StringBuilder result = new StringBuilder();
+        String year = date.substring(0, 4);
+        String month = date.substring(5, 7);
+        String day = date.substring(8, 10);
+        result.append(Integer.toBinaryString(Integer.parseInt(year)));
+        result.append("-");
+        result.append(Integer.toBinaryString(Integer.parseInt(month)));
+        result.append("-");
+        result.append(Integer.toBinaryString(Integer.parseInt(day)));
+        return result.toString();
+    }
+
 
 }

@@ -772,5 +772,24 @@ public class NumsEasyProblems2 {
         }
         return position;
     }
+
+    /**
+     * 1ms 100.00%
+     * <a href="https://leetcode.com/problems/richest-customer-wealth/description/"> Richest Customer Wealth</a>
+     **/
+    public int maximumWealth(int[][] accounts) {
+        int maxSum = 0;
+        int sum = 0;
+
+        for (int[] account : accounts) {
+            for (int j = 0; j < accounts[0].length; j++) {
+                sum += account[j];
+            }
+            maxSum = Math.max(maxSum, sum);
+            sum = 0;
+        }
+        return maxSum;
+    }
+
 }
 
