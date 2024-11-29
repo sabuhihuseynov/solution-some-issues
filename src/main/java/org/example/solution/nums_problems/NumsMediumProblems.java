@@ -44,8 +44,9 @@ public class NumsMediumProblems {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < values.length; ++i) {
-            if (num == 0)
+            if (num == 0) {
                 break;
+            }
             while (num >= values[i]) {
                 sb.append(symbols[i]);
                 num -= values[i];
@@ -135,7 +136,9 @@ public class NumsMediumProblems {
         int newDist = distances[current] + 1;
 
         for (int neighbor : graph.get(current)) {
-            if (distances[neighbor] <= newDist) continue;
+            if (distances[neighbor] <= newDist) {
+                continue;
+            }
 
             distances[neighbor] = newDist;
             updateDistances(graph, neighbor, distances);
