@@ -1,9 +1,13 @@
 package org.example.solution.nums_problems;
 
 import java.util.ArrayDeque;
+import java.util.Comparator;
 import java.util.Deque;
+import java.util.PriorityQueue;
 
 public class NumsHardProblems {
+
+    private static final int[][] MOVES = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
     /**
      * <b>HARD</b>
@@ -51,7 +55,7 @@ public class NumsHardProblems {
                 return obstacle;
             }
 
-            for (int[] d : dir) {
+            for (int[] d : MOVES) {
                 int row = r + d[0];
                 int col = c + d[1];
 
@@ -71,4 +75,59 @@ public class NumsHardProblems {
     public boolean isValid(int i, int j, int n, int m) {
         return i >= 0 && j >= 0 && i < n && j < m;
     }
+
+    /**
+     * <b>HARD</b>
+     * 112 ms 100.00%
+     * <a href="https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/description/?envType=daily-question&envId=2024-11-29"> Minimum Time to Visit a Cell In a Grid</a>
+     **/
+    public int minimumTime(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        if (grid[0][1] > 1 && grid[1][0] > 1) {
+            return -1;
+        }
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        boolean[][] visited = new boolean[m][n];
+
+        pq.offer(new int[]{0, 0, 0});
+        visited[0][0] = true;
+
+        while (!pq.isEmpty()) {
+            int[] curr = pq.poll();
+            int time = curr[0];
+            int row = curr[1];
+            int col = curr[2];
+
+            for (int[] dir : MOVES) {
+                int newRow = row + dir[0];
+                int newCol = col + dir[1];
+
+                if (!valid(newRow, newCol, m, n) || visited[newRow][newCol]) {
+                    continue;
+                }
+
+                int newTime = time + 1;
+                if (grid[newRow][newCol] > newTime) {
+                    int wait = ((grid[newRow][newCol] - newTime + 1) / 2) * 2;
+                    newTime += wait;
+                }
+
+                if (newRow == m - 1 && newCol == n - 1) {
+                    return newTime;
+                }
+
+                visited[newRow][newCol] = true;
+                pq.offer(new int[]{newTime, newRow, newCol});
+            }
+        }
+        return -1;
+    }
+
+    public boolean valid(int i, int j, int n, int m) {
+        return i >= 0 && j >= 0 && i < n && j < m;
+    }
+
 }
