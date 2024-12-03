@@ -1,7 +1,6 @@
 package org.example.solution.nums_problems;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NumsMediumProblems {
@@ -61,19 +60,18 @@ public class NumsMediumProblems {
      * <a href="https://leetcode.com/problems/find-champion-ii/description/?envType=daily-question&envId=2024-11-26"> 2924. Find Champion II</a>
      **/
     public int findChampion(int n, int[][] edges) {
-        boolean[] isUndefeated = new boolean[n];
-        Arrays.fill(isUndefeated, true);
+        int[] defeated = new int[n];
 
         for (int[] edge : edges) {
             var loser = edge[1];
-            isUndefeated[loser] = false;
+            defeated[loser]++;
         }
 
         var champion = -1;
         var championCount = 0;
 
         for (int team = 0; team < n; team++) {
-            if (isUndefeated[team]) {
+            if (defeated[team] == 0) {
                 championCount++;
                 champion = team;
             }

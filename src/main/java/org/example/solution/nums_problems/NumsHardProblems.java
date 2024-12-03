@@ -40,7 +40,6 @@ public class NumsHardProblems {
     public int minimumObstacles(int[][] grid) {
         int n = grid.length;
         int m = grid[0].length;
-        int[][] dir = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
         Deque<int[]> dq = new ArrayDeque<>();
         dq.add(new int[]{0, 0, 0});
         grid[0][0] = -1;
