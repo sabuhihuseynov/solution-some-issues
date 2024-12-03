@@ -109,7 +109,9 @@ public class SortingAlgorithms {
     }
 
     public void insertionSort(int arr[], int n) {
-        int i, key, j;
+        int i;
+        int key;
+        int j;
         for (i = 1; i < n; i++) {
             key = arr[i];
             j = i - 1;
@@ -121,7 +123,6 @@ public class SortingAlgorithms {
             arr[j + 1] = key;
         }
     }
-
 
 
 }
