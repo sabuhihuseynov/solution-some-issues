@@ -43,7 +43,7 @@ public class SortingAlgorithms {
             quickSort(arr, i, high);
     }
 
-    void merge(int arr[], int l, int m, int r) {
+    static void merge(int arr[], int l, int m, int r) {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
         int n2 = r - m;
@@ -61,7 +61,8 @@ public class SortingAlgorithms {
         // Merge the temp arrays
 
         // Initial indices of first and second subarrays
-        int i = 0, j = 0;
+        int i = 0;
+        int j = 0;
 
         // Initial index of merged subarray array
         int k = l;
@@ -93,7 +94,7 @@ public class SortingAlgorithms {
 
     // Main function that sorts arr[l..r] using
     // merge()
-    public void mergeSort(int arr[], int l, int r) {
+    public static void mergeSort(int arr[], int l, int r) {
         if (l < r) {
 
             // Find the middle point
@@ -106,6 +107,11 @@ public class SortingAlgorithms {
             // Merge the sorted halves
             merge(arr, l, m, r);
         }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = { 14, 2,41,23,21,18,20};
+        mergeSort(arr, 0, arr.length - 1);
     }
 
     public void insertionSort(int arr[], int n) {

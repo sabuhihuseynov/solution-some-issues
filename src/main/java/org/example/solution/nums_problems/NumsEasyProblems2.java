@@ -87,18 +87,18 @@ public class NumsEasyProblems2 {
      * <a href="https://leetcode.com/problems/relative-sort-array/description/"> Relative Sort Array</a>
      **/
     public int[] relativeSortArray(int[] arr1, int[] arr2) {
-        int[] ans = new int[1001];
+        int[] answer = new int[1001];
         for (int n : arr1) {
-            ans[n]++;
+            answer[n]++;
         }
         int i = 0;
         for (int n : arr2) {
-            while (ans[n]-- > 0) {
+            while (answer[n]-- > 0) {
                 arr1[i++] = n;
             }
         }
-        for (int n = 0; n < ans.length; n++) {
-            while (ans[n]-- > 0) {
+        for (int n = 0; n < answer.length; n++) {
+            while (answer[n]-- > 0) {
                 arr1[i++] = n;
             }
         }
@@ -156,18 +156,12 @@ public class NumsEasyProblems2 {
      * <a href="https://leetcode.com/problems/unique-number-of-occurrences/description/"> Unique Number of Occurrences</a>
      **/
     public boolean uniqueOccurrences(int[] arr) {
-        HashMap<Integer, Integer> frequencyMap = new HashMap<>();
-        HashSet<Integer> check = new HashSet<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
         for (int number : arr) {
-            int oldValue = frequencyMap.getOrDefault(number, 0);
-            frequencyMap.put(number, oldValue + 1);
+            map.merge(number, 1, Integer::sum);
         }
-        for (Integer value : frequencyMap.values()) {
-            if (!check.add(value)) {
-                return false;
-            }
-        }
-        return true;
+        HashSet<Integer> set = new HashSet<>(map.values());
+        return set.size() == map.size();
     }
 
     /**

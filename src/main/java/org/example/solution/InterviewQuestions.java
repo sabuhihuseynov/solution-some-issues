@@ -1,6 +1,8 @@
 package org.example.solution;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -84,13 +86,10 @@ public class InterviewQuestions {
         int max = Integer.MIN_VALUE;
         String[] strings = text.split(" ");
         HashMap<String, Integer> map = new HashMap<>();
-        for (String string : strings) {
-            int freq = map.getOrDefault(string, 1);
-            map.put(string, freq);
-        }
-        for (String string : map.keySet()) {
-            if (map.get(string) > max) {
-                max = map.get(string);
+        for (String word : strings) {
+            map.merge(word, 1, Integer::sum);
+            if (max < map.get(word)) {
+                max = map.get(word);
             }
         }
         return max;
@@ -112,12 +111,12 @@ public class InterviewQuestions {
     }
 
     public boolean isValidBrackets(String text) {
-        Stack<Character> stack1 = new Stack<>();
+        Deque<Character> stack1 = new ArrayDeque<>();
         for (int i = 0; i < text.length(); i++) {
             stack1.push(text.charAt(i));
         }
         boolean isValid = true;
-        Stack<Character> stack2 = new Stack<>();
+        Deque<Character> stack2 = new ArrayDeque<>();
 
         while (!stack1.isEmpty()) {
             char bracket = stack1.pop();
