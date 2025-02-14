@@ -3,79 +3,89 @@ package org.example.games;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Hangman {
-
-    private String[] words = {
+    private static final int MAX_ATTEMPTS = 6;
+    private static final String[] WORDS = {
             "elephant", "chocolate", "airplane", "pyramid", "rainbow",
             "kangaroo", "giraffe", "volcano", "galaxy", "asteroid",
             "mountain", "ocean", "dolphin", "penguin", "avocado",
             "jungle", "lighthouse", "mermaid", "universe", "island",
-            "diamond", "hurricane", "butterfly", "tornado", "microscope",
-            "fireworks", "waterfall", "moonlight", "sunflower", "alligator",
-            "bamboo", "compass", "treasure", "sandcastle", "parachute",
-            "sapphire", "tsunami", "honeycomb", "carousel", "helicopter",
-            "squirrel", "telescope", "iceberg", "hibiscus", "submarine",
-            "sundial", "strawberry", "carousel", "thermometer", "tornado"
+            "diamond", "hurricane", "butterfly", "microscope",
+            "fireworks", "waterfall", "moonlight", "sunflower",
+            "alligator", "bamboo", "compass", "treasure", "sandcastle",
+            "parachute", "sapphire", "tsunami", "honeycomb", "carousel",
+            "helicopter", "squirrel", "telescope", "iceberg", "hibiscus",
+            "submarine", "sundial", "strawberry", "thermometer"
     };
-    private String selectedWord;
-    private HashSet<Character> guessedLetters;
+
+    private final String selectedWord;
+    private final Set<Character> guessedLetters;
+    private final Set<Character> wordCharacters;
     private int remainingAttempts;
 
     public Hangman() {
         Random random = new Random();
-        selectedWord = words[random.nextInt(words.length)];
+        selectedWord = WORDS[random.nextInt(WORDS.length)];
         guessedLetters = new HashSet<>();
-        remainingAttempts = 6;
+        wordCharacters = new HashSet<>();
+        for (char c : selectedWord.toCharArray()) {
+            wordCharacters.add(c);
+        }
+        remainingAttempts = MAX_ATTEMPTS;
     }
 
     public void start() {
-        Scanner scanner = new Scanner(System.in);
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (remainingAttempts > 0) {
+                displayWord();
+                System.out.print("Guess a letter or the whole word (or type 'exit' to quit): ");
+                String input = scanner.nextLine().trim().toLowerCase();
 
-        while (remainingAttempts > 0) {
-            displayWord();
-            System.out.print("Guess a letter or the whole word (or type 'exit' to quit): ");
-            String input = scanner.nextLine();
+                if (input.equals("exit")) {
+                    System.out.println("Thanks for playing!");
+                    return;
+                }
 
-            if (input.equalsIgnoreCase("exit")) {
-                System.out.println("Thanks for playing!");
-                return;
+                if (input.length() == 1) {
+                    processLetterGuess(input.charAt(0));
+                } else if (processWordGuess(input)) {
+                    return;
+                }
+
+                if (guessedLetters.containsAll(wordCharacters)) {
+                    System.out.println("Congratulations! You've guessed the word: " + selectedWord);
+                    return;
+                }
             }
-            if (input.length() == 1) {
-                processLetterGuess(input.charAt(0));
-            } else if(isWordGuessed(input)) {
-                return;
-            }
-            if (isAllLettersGuessed()) {
-                System.out.println("Congratulations! You've guessed the word: " + selectedWord);
-                return;
-            }
+            System.out.println("Game Over! The word was: " + selectedWord);
         }
-
-        System.out.println("Game Over! The word was: " + selectedWord);
     }
 
     private void displayWord() {
+        StringBuilder sb = new StringBuilder();
         for (char letter : selectedWord.toCharArray()) {
-            if (guessedLetters.contains(letter)) {
-                System.out.print(letter);
-            } else {
-                System.out.print("_");
-            }
+            sb.append(guessedLetters.contains(letter) ? letter : "_");
         }
-        System.out.println();
+        System.out.println(sb);
     }
 
-    public void processLetterGuess(char guess) {
+    private void processLetterGuess(char guess) {
+        if (guessedLetters.contains(guess)) {
+            System.out.println("You've already guessed this letter.");
+            return;
+        }
         guessedLetters.add(guess);
-        if (!selectedWord.contains(String.valueOf(guess))) {
+
+        if (!wordCharacters.contains(guess)) {
             remainingAttempts--;
             System.out.println("Incorrect guess! Attempts left: " + remainingAttempts);
         }
     }
 
-    public boolean isWordGuessed(String input) {
-        if (input.equalsIgnoreCase(selectedWord)) {
+    private boolean processWordGuess(String input) {
+        if (input.equals(selectedWord)) {
             System.out.println("Congratulations! You've guessed the word: " + selectedWord);
             return true;
         }
@@ -84,18 +94,7 @@ public class Hangman {
         return false;
     }
 
-    private boolean isAllLettersGuessed() {
-        for (char letter : selectedWord.toCharArray()) {
-            if (!guessedLetters.contains(letter)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
     public static void main(String[] args) {
         new Hangman().start();
     }
 }
-
