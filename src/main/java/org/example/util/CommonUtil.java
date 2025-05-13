@@ -6,15 +6,18 @@ import java.util.Map;
 
 public class CommonUtil {
 
-    public static Map<String, String> findCountryIso2Code() {
-        String[] isoCountries = Locale.getISOCountries();
-        HashMap<String, String> countries = HashMap.newHashMap(isoCountries.length);
-        for (String country : isoCountries) {
-            Locale locale = Locale.of("", country);
-            countries.put(locale.getISO3Country().toUpperCase(), locale.getCountry());
+    private static Map<String, String> countries = null;
+
+    public static String convertToCountryIso2Code(String countryIso3Code) {
+        if (countries == null) {
+            String[] isoCountries = Locale.getISOCountries();
+            countries = HashMap.newHashMap(isoCountries.length);
+            for (String country : isoCountries) {
+                Locale locale = Locale.of("", country);
+                countries.put(locale.getISO3Country().toUpperCase(), locale.getCountry());
+            }
         }
-        countries.put("GBR", "UK");
-        return countries;
+        return countries.get(countryIso3Code);
     }
 
 }

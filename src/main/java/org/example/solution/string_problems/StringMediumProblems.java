@@ -9,7 +9,7 @@ public class StringMediumProblems {
      * 1ms
      * 99.49%
      * <a href="https://leetcode.com/problems/word-break/description/"> Word Break</a>
-     **/
+     */
     public boolean wordBreak(String s, List<String> wordDict) {
         int n = s.length();
         boolean[] dp = new boolean[n + 1];
