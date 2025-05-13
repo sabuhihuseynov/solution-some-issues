@@ -54,7 +54,7 @@ public class TicTacToe {
                 if (input >= 1 && input <= 3) {
                     break;
                 } else {
-                    System.out.println("Invalid input. Please enter a number between 0 and 100.");
+                    System.out.println("Invalid input. Please enter a number between 1 and 3.");
                 }
             } else {
                 System.out.println("Invalid input. Please enter a number.");
