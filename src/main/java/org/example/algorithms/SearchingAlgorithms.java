@@ -1,4 +1,4 @@
-package org.example.solution.algorithms;
+package org.example.algorithms;
 
 import java.util.Arrays;
 

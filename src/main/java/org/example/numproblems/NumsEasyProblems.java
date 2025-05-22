@@ -1,4 +1,4 @@
-package org.example.solution.nums_problems;
+package org.example.numproblems;
 
 import java.io.BufferedReader;
 import java.io.IOException;

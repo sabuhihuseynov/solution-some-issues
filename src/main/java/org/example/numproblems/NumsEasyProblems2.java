@@ -1,4 +1,4 @@
-package org.example.solution.nums_problems;
+package org.example.numproblems;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package org.example.solution.string_problems;
+package org.example.stringproblems;
 
 import java.util.ArrayList;
 import java.util.Arrays;

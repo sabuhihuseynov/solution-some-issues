@@ -1,4 +1,4 @@
-package org.example.solution;
+package org.example.interview;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
