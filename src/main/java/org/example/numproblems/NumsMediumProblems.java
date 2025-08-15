@@ -217,5 +217,29 @@ public class NumsMediumProblems {
         return result.next;
     }
 
+    /**
+     * <b>MEDIUM</b>
+     * 1 ms 100.00%
+     * <a href="https://leetcode.com/problems/reverse-integer/"> Reverse Integer</a>
+     **/
+    public int reverse(int x) {
+        int rev = 0;
+        int digit;
+        while (x != 0) {
+            digit = x % 10;
+            x /= 10;
+
+            if (rev > Integer.MAX_VALUE / 10 || (rev == Integer.MAX_VALUE / 10 && digit > 7)) {
+                return 0; // positive overflow
+            }
+            if (rev < Integer.MIN_VALUE / 10 || (rev == Integer.MIN_VALUE / 10 && digit < -8)) {
+                return 0; // negative overflow
+            }
+
+            rev = rev * 10 + digit;
+        }
+        return rev;
+    }
+
 
 }
