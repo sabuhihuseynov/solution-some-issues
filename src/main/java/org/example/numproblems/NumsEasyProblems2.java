@@ -694,7 +694,6 @@ public class NumsEasyProblems2 {
         return ans;
     }
 
-
     /**
      * 0ms 100.00%
      * <a href="https://leetcode.com/problems/longest-common-prefix/description/"> Longest Common Prefix</a>
@@ -783,6 +782,23 @@ public class NumsEasyProblems2 {
             sum = 0;
         }
         return maxSum;
+    }
+
+    public boolean isPowerOfFour(int n) {
+        if (n == 1) {
+            return true;
+        }
+        if (n <= 0) {
+            return false;
+        }
+        while (n > 1) {
+            int mod = n % 4;
+            n = n / 4;
+            if (mod != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
