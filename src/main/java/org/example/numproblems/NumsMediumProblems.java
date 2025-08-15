@@ -241,5 +241,48 @@ public class NumsMediumProblems {
         return rev;
     }
 
+    /**
+     * <b>MEDIUM</b>
+     * 1 ms 100.00%
+     * <a href="https://leetcode.com/problems/string-to-integer-atoi/description/"> String to Integer (atoi)</a>
+     **/
+    public int myAtoi(String s) {
+        if (s == null || s.isEmpty()) {
+            return 0;
+        }
+
+        int i = 0;
+        int n = s.length();
+
+        while (i < n && s.charAt(i) == ' ') {
+            i++;
+        }
+
+        boolean isNegative = false;
+        if (i < n && (s.charAt(i) == '-' || s.charAt(i) == '+')) {
+            isNegative = s.charAt(i) == '-';
+            i++;
+        }
+
+        long result = 0;
+        while (i < n && Character.isDigit(s.charAt(i))) {
+            int digit = s.charAt(i) - '0';
+
+            if (result > (Integer.MAX_VALUE - digit) / 10) {
+                return isNegative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            }
+
+            result = result * 10 + digit;
+            i++;
+        }
+
+        result = isNegative ? -result : result;
+
+        if (result > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+        if (result < Integer.MIN_VALUE) return Integer.MIN_VALUE;
+
+        return (int) result;
+    }
+
 
 }
