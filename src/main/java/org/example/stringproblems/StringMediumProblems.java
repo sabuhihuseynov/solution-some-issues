@@ -1,5 +1,6 @@
 package org.example.stringproblems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StringMediumProblems {
@@ -27,6 +28,39 @@ public class StringMediumProblems {
             }
         }
         return dp[n];
+    }
+
+
+    public void solveParenthesis(StringBuilder sb, int n, int open, int close, List<String> res){
+        if(sb.length() == 2*n){
+            res.add(sb.toString());
+            return ;
+        }
+        if(open < n){
+            sb.append('(');
+            solveParenthesis(sb, n, open+1, close, res);
+            sb.deleteCharAt(sb.length()-1);
+        }
+
+        if(close < open){
+            sb.append(')');
+            solveParenthesis(sb, n, open, close+1, res);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
+
+    /**
+     * <b>MEDIUM</b>
+     * 0 ms 100.00%
+     * <a href="https://leetcode.com/problems/generate-parentheses/description/"> Generate Parentheses</a>
+     **/
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+
+        solveParenthesis(sb, n, 0, 0, res);
+
+        return res;
     }
 
 
