@@ -48,6 +48,12 @@ public class StringMediumProblems {
             sb.deleteCharAt(sb.length()-1);
         }
     }
+
+    /**
+     * <b>MEDIUM</b>
+     * 0 ms 100.00%
+     * <a href="https://leetcode.com/problems/generate-parentheses/description/"> Generate Parentheses</a>
+     **/
     public List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
@@ -55,11 +61,6 @@ public class StringMediumProblems {
         solveParenthesis(sb, n, 0, 0, res);
 
         return res;
-    }
-
-    public static void main(String[] args) {
-        StringMediumProblems sm = new StringMediumProblems();
-        sm.generateParenthesis(3);
     }
 
 

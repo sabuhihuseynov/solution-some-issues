@@ -284,6 +284,11 @@ public class NumsMediumProblems {
         return (int) result;
     }
 
+    /**
+     * <b>MEDIUM</b>
+     * 0 ms 100.00%
+     * <a href="https://leetcode.com/problems/swap-nodes-in-pairs/description/"> Swap Nodes in Pairs</a>
+     **/
     public ListNode swapPairs(ListNode head) {
         if (head == null || head.next == null)
             return head;
