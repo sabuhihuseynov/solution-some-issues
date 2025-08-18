@@ -284,5 +284,26 @@ public class NumsMediumProblems {
         return (int) result;
     }
 
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+
+        ListNode first = head;
+        ListNode second = head.next;
+        ListNode next = second.next;
+
+        while (second != null) {
+            int temp = first.val;
+            first.val = second.val;
+            second.val = temp;
+
+            first = next;
+            second = first == null ? null : first.next;
+            next = second == null ? null : second.next;
+        }
+
+        return head;
+    }
+
 
 }
