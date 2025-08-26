@@ -3,6 +3,7 @@ package org.example.numproblems;
 import org.example.model.ListNode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class NumsMediumProblems {
@@ -184,7 +185,6 @@ public class NumsMediumProblems {
         return profit;
     }
 
-
     /**
      * <b>MEDIUM</b>
      * 1 ms 100.00%
@@ -308,6 +308,49 @@ public class NumsMediumProblems {
         }
 
         return head;
+    }
+
+    public static void main(String[] args) {
+        NumsMediumProblems numsMediumProblems = new NumsMediumProblems();
+        int[] nums = new int[]{2,2};
+        System.out.println(Arrays.toString(numsMediumProblems.searchRange(nums, 2)));
+    }
+
+    public int[] searchRange(int[] nums, int target) {
+        var findingIndex = binarySearch(nums, target);
+        if (findingIndex == -1) {
+            return new int[]{-1, -1};
+        }
+        var first = findingIndex;
+        var last = findingIndex;
+
+        while ((first != 0 && nums[first - 1] == target) || (last != nums.length - 1 && nums[last + 1] == target)) {
+            if (first != 0 && nums[first - 1] == target) {
+                first--;
+            }
+            if (last != nums.length - 1 && nums[last + 1] == target) {
+                last++;
+            }
+        }
+
+        return new int[]{first, last};
+    }
+
+    private int binarySearch(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length - 1;
+        int mid;
+        while (low <= high) {
+            mid = low + (high - low) / 2;
+            if (target == nums[mid]) {
+                return mid;
+            } else if (target > nums[mid]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return -1;
     }
 
 
