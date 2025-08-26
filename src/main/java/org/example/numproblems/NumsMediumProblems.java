@@ -310,12 +310,11 @@ public class NumsMediumProblems {
         return head;
     }
 
-    public static void main(String[] args) {
-        NumsMediumProblems numsMediumProblems = new NumsMediumProblems();
-        int[] nums = new int[]{2,2};
-        System.out.println(Arrays.toString(numsMediumProblems.searchRange(nums, 2)));
-    }
-
+    /**
+     * <b>MEDIUM</b>
+     * 0 ms 100.00%
+     * <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/"> Find First and Last Position of Element in Sorted Array</a>
+     **/
     public int[] searchRange(int[] nums, int target) {
         var findingIndex = binarySearch(nums, target);
         if (findingIndex == -1) {
