@@ -1,7 +1,9 @@
 package org.example.stringproblems;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class StringMediumProblems {
 
@@ -63,5 +65,71 @@ public class StringMediumProblems {
         return res;
     }
 
+    /**
+     * <b>MEDIUM</b>
+     * 2 ms 77.43%
+     * <a href="https://leetcode.com/problems/valid-sudoku/description/"> Valid Sudoku</a>
+     **/
+    public boolean isValidSudoku(char[][] board) {
+        for (int row = 0; row < 9; row++) {
+            if (isNotValidUnit(board, row, 0, 0, 1)) {
+                return false;
+            }
+        }
+
+        for (int col = 0; col < 9; col++) {
+            if (isNotValidUnit(board, 0, col, 1, 0)) {
+                return false;
+            }
+        }
+
+        for (int boxRow = 0; boxRow < 3; boxRow++) {
+            for (int boxCol = 0; boxCol < 3; boxCol++) {
+                if (!isValid3x3Box(board, boxRow * 3, boxCol * 3)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isNotValidUnit(char[][] board, int startRow, int startCol, int rowInc, int colInc) {
+        Set<Character> seen = new HashSet<>();
+
+        for (int i = 0; i < 9; i++) {
+            int row = startRow + i * rowInc;
+            int col = startCol + i * colInc;
+            char cell = board[row][col];
+
+            if (cell != '.') {
+                if (seen.contains(cell)) {
+                    return true;
+                }
+                seen.add(cell);
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isValid3x3Box(char[][] board, int startRow, int startCol) {
+        Set<Character> seen = new HashSet<>();
+
+        for (int row = startRow; row < startRow + 3; row++) {
+            for (int col = startCol; col < startCol + 3; col++) {
+                char cell = board[row][col];
+
+                if (cell != '.') {
+                    if (seen.contains(cell)) {
+                        return false;
+                    }
+                    seen.add(cell);
+                }
+            }
+        }
+
+        return true;
+    }
 
 }

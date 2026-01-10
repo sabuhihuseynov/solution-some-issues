@@ -10,7 +10,7 @@ public class SearchingAlgorithms {
         int low = 0;
         int high = arr.length - 1;
         int mid = 0;
-        while (low < high) {
+        while (low <= high) {
             mid = low + (high - low) / 2;
             if (searchingElement == arr[mid]) {
                 isFound = true;
