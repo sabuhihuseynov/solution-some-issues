@@ -41,7 +41,7 @@ public class NumsHardProblems {
         int n = grid.length;
         int m = grid[0].length;
         Deque<int[]> dq = new ArrayDeque<>();
-        dq.add(new int[]{0, 0, 0});
+        dq.add(new int[] {0, 0, 0});
         grid[0][0] = -1;
 
         while (!dq.isEmpty()) {
@@ -60,9 +60,9 @@ public class NumsHardProblems {
 
                 if (isValid(row, col, n, m) && grid[row][col] != -1) {
                     if (grid[row][col] == 0) {
-                        dq.addFirst(new int[]{row, col, obstacle});
+                        dq.addFirst(new int[] {row, col, obstacle});
                     } else {
-                        dq.addLast(new int[]{row, col, obstacle + 1});
+                        dq.addLast(new int[] {row, col, obstacle + 1});
                     }
                     grid[row][col] = -1;
                 }
@@ -91,7 +91,7 @@ public class NumsHardProblems {
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
         boolean[][] visited = new boolean[m][n];
 
-        pq.offer(new int[]{0, 0, 0});
+        pq.offer(new int[] {0, 0, 0});
         visited[0][0] = true;
 
         while (!pq.isEmpty()) {
@@ -119,7 +119,7 @@ public class NumsHardProblems {
                 }
 
                 visited[newRow][newCol] = true;
-                pq.offer(new int[]{newTime, newRow, newCol});
+                pq.offer(new int[] {newTime, newRow, newCol});
             }
         }
         return -1;
@@ -127,6 +127,50 @@ public class NumsHardProblems {
 
     public boolean valid(int i, int j, int n, int m) {
         return i >= 0 && j >= 0 && i < n && j < m;
+    }
+
+    /**
+     * <p>Problem Description:
+     * Find the maximum sum of differences (sell - buy) where the sell index must
+     * be greater than the buy index. We can skip elements, and we cannot reuse
+     * the same specific instance of an element .
+     *
+     * <p>Logic:
+     * We iterate through the prices and maintain a Min-Heap of potential buy prices.
+     * For every price, we treat it as a potential sell price against the minimum
+     * currently in the heap. If selling yields a profit, we "execute" the trade
+     * but keep the current price in the ecosystem (via the heap logic) to allow
+     * for "upgrading" the trade later if a better sell price appears.
+     *
+     * <p>Example:
+     * Input: [7, 3, 1, 5, 6, 10]
+     * Output: 12
+     * Logic: Effectively pairs (3, 6) and (1, 10).
+     * Calculation: (6 - 3) + (10 - 1) = 3 + 9 = 12.
+     *
+     * @param prices an array of integer prices
+     * @return the maximum possible profit from valid pairings
+     */
+    public int maxProfit(int[] prices) {
+
+        if (prices == null || prices.length < 2) {
+            return 0;
+        }
+
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        minHeap.add(prices[0]);
+        int maxProfit = 0;
+
+        for (int i = 1; i < prices.length; i++) {
+            Integer currentMin = minHeap.peek();
+
+            if (currentMin != null && prices[i] > currentMin) {
+                maxProfit += prices[i] - currentMin;
+                minHeap.poll();
+            }
+            minHeap.add(prices[i]);
+        }
+        return maxProfit;
     }
 
 }
